@@ -342,8 +342,8 @@ script.on_nth_tick(60, function()
     end
     putAll(inventory)
     local plan = createPlan(inventory)
-    refillAll(inventory, plan)
     processCrafts(inventory, plan)
+    refillAll(inventory, plan)
     if global.energy < 0 then
         global.energy = 0
     end
