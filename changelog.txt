@@ -1,0 +1,6 @@
+Version 0.0.1 / 03-09-2023
+Initial state:
+- Material Chest
+- Material Combinator
+- Fluids Digitization
+- Crafting, Smelting and Chemical templates for 5 science types production
