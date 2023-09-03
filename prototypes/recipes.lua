@@ -67,7 +67,7 @@ data:extend({
     -- Science T1 / T2
     recipe("crafting", 1, "ms-crafting-card-automation-science-pack", items("automation-science-pack", 200, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-automation-science-pack", 1)),
     recipe("crafting", 1, "ms-smelting-card-copper-plate", items("copper-plate", 100, "electric-furnace", 1, "ms-material-crystal-charged", 1), items("ms-smelting-card-copper-plate", 1)),
-    recipe("crafting", 1, "ms-crafting-card-iron-gear-wheel", items("iron-gear-wheel", 200, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-iron-gear-wheel", 1)),
+    recipe("crafting", 1, "ms-crafting-card-iron-gear-wheel", items("iron-gear-wheel", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-iron-gear-wheel", 1)),
     recipe("crafting", 1, "ms-smelting-card-iron-plate", items("iron-plate", 100, "electric-furnace", 1, "ms-material-crystal-charged", 1), items("ms-smelting-card-iron-plate", 1)),
 
     recipe("crafting", 1, "ms-crafting-card-logistic-science-pack", items("logistic-science-pack", 200, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-logistic-science-pack", 1)),
