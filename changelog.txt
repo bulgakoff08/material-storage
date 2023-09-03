@@ -4,3 +4,5 @@ Initial state:
 - Material Combinator
 - Fluids Digitization
 - Crafting, Smelting and Chemical templates for 5 science types production
+Version 0.0.2 / 03-09-2023
+- Fixed issue when craft waits for full stack of ingredient
