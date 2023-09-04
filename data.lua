@@ -84,5 +84,11 @@ data:extend({
         name = "ms-military",
         group = "ms-material-storage",
         order = "l-a"
+    },
+    {
+        type = "item-subgroup",
+        name = "ms-bees",
+        group = "ms-material-storage",
+        order = "m-a"
     }
 })

@@ -1,8 +1,13 @@
+Version 0.0.3 / 04-09-2023
+- Added optional support for mod "Simply Bees"
+- Added Brazilian Translation (thanks to @LUISDASARTIMANHAS)
+
+Version 0.0.2 / 03-09-2023
+- Fixed issue when craft waits for full stack of ingredient
+
 Version 0.0.1 / 03-09-2023
 Initial state:
 - Material Chest
 - Material Combinator
 - Fluids Digitization
 - Crafting, Smelting and Chemical templates for 5 science types production
-Version 0.0.2 / 03-09-2023
-- Fixed issue when craft waits for full stack of ingredient

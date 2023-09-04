@@ -122,6 +122,21 @@ data:extend({
     recipe("crafting-with-fluid", 30, "ms-digital-sulfuric-acid", items("sulfuric-acid", 1024), items("ms-digital-sulfuric-acid", 1)),
     recipe("crafting-with-fluid", 30, "ms-digital-water", items("water", 1024), items("ms-digital-water", 1)),
 
+    -- Bees
+    recipe("crafting", 1, "ms-crafting-card-sb-coal-from-wax", {}, items("ms-crafting-card-sb-coal-from-wax", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-coal-wax", {}, items("ms-crafting-card-sb-coal-wax", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-copper-ore-from-wax", {}, items("ms-crafting-card-sb-copper-ore-from-wax", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-copper-wax", {}, items("ms-crafting-card-sb-copper-wax", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-honey-cube", {}, items("ms-crafting-card-sb-honey-cube", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-iron-ore-from-wax", {}, items("ms-crafting-card-sb-iron-ore-from-wax", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-iron-wax", {}, items("ms-crafting-card-sb-iron-wax", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-solid-fuel-from-wax", {}, items("ms-crafting-card-sb-solid-fuel-from-wax", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-stone-from-wax", {}, items("ms-crafting-card-sb-stone-from-wax", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-stone-wax", {}, items("ms-crafting-card-sb-stone-wax", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-uranium-ore-from-wax", {}, items("ms-crafting-card-sb-uranium-ore-from-wax", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-uranium-wax", {}, items("ms-crafting-card-sb-uranium-wax", 1)),
+    recipe("crafting", 1, "ms-crafting-card-sb-wooden-frame", {}, items("ms-crafting-card-sb-wooden-frame", 1)),
+
     -- TEMPLATES FOR COPY/PASTE
     -- recipe("crafting", 1, "", {}, items("", 1)),
     -- recipe("crafting", 1, "", {}, items("", 1)),

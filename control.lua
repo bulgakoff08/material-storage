@@ -1,56 +1,10 @@
+local recipes = require("prototypes.crafting-templates")
 local specialItems = {
     "ms-memory-module-t1",
     "ms-memory-module-t2",
     "ms-memory-module-t3",
     "ms-material-crystal-charged",
     "ms-material-chest-solar-panel"
-}
-
-local recipes = {
-    -- TEMPLATES FOR COPY/PASTE
-    -- [""] = {result = "", amount = 1, inputs = {[""] = 1}},
-
-    ["ms-chemical-card-battery"] = {result = "battery", amount = 1, inputs = {["copper-plate"] = 1, ["iron-plate"] = 1, ["sulfuric-acid"] = 20}},
-    ["ms-chemical-card-plastic-bar"] = {result = "plastic-bar", amount = 1, inputs = {["coal"] = 1, ["petroleum-gas"] = 20}},
-    ["ms-chemical-card-solid-fuel-1"] = {result = "solid-fuel", amount = 1, inputs = {["petroleum-gas"] = 20}},
-    ["ms-chemical-card-solid-fuel-2"] = {result = "solid-fuel", amount = 1, inputs = {["light-oil"] = 10}},
-    ["ms-chemical-card-solid-fuel-3"] = {result = "solid-fuel", amount = 1, inputs = {["heavy-oil"] = 20}},
-    ["ms-chemical-card-sulfur"] = {result = "sulfur", amount = 2, inputs = {["petroleum-gas"] = 30, ["water"] = 30}},
-
-    ["ms-crafting-card-advanced-circuit"] = {result = "advanced-circuit", amount = 1, inputs = {["copper-cable"] = 4, ["electronic-circuit"] = 2, ["plastic-bar"] = 1}},
-    ["ms-crafting-card-automation-science-pack"] = {result = "automation-science-pack", amount = 1, inputs = {["copper-plate"] = 1, ["iron-gear-wheel"] = 1}},
-    ["ms-crafting-card-chemical-science-pack"] = {result = "chemical-science-pack", amount = 1, inputs = {["advanced-circuit"] = 3, ["engine-unit"] = 2, ["sulfur"] = 1}},
-    ["ms-crafting-card-copper-cable"] = {result = "copper-cable", amount = 2, inputs = {["copper-plate"] = 1}},
-    ["ms-crafting-card-electric-engine-unit"] = {result = "electric-engine-unit", amount = 1, inputs = {["electronic-circuit"] = 2, ["engine-unit"] = 1, ["lubricant"] = 15}},
-    ["ms-crafting-card-electric-furnace"] = {result = "electric-furnace", amount = 1, inputs = {["advanced-circuit"] = 5, ["steel-plate"] = 10, ["stone-brick"] = 10}},
-    ["ms-crafting-card-electronic-circuit"] = {result = "electronic-circuit", amount = 1, inputs = {["copper-cable"] = 3, ["iron-plate"] = 1}},
-    ["ms-crafting-card-engine-unit"] = {result = "engine-unit", amount = 1, inputs = {["iron-gear-wheel"] = 1, ["pipe"] = 2, ["steel-plate"] = 1}},
-    ["ms-crafting-card-firearm-magazine"] = {result = "firearm-magazine", amount = 1, inputs = {["iron-plate"] = 4}},
-    ["ms-crafting-card-flying-robot-frame"] = {result = "flying-robot-frame", amount = 1, inputs = {["battery"] = 2, ["electric-engine-unit"] = 1, ["electronic-circuit"] = 3, ["steel-plate"] = 1}},
-    ["ms-crafting-card-grenade"] = {result = "grenade", amount = 1, inputs = {["coal"] = 10, ["iron-plate"] = 5}},
-    ["ms-crafting-card-inserter"] = {result = "inserter", amount = 1, inputs = {["electronic-circuit"] = 1, ["iron-gear-wheel"] = 1, ["iron-plate"] = 1}},
-    ["ms-crafting-card-iron-gear-wheel"] = {result = "iron-gear-wheel", amount = 1, inputs = {["iron-plate"] = 2}},
-    ["ms-crafting-card-iron-stick"] = {result = "iron-stick", amount = 2, inputs = {["iron-plate"] = 1}},
-    ["ms-crafting-card-logistic-science-pack"] = {result = "logistic-science-pack", amount = 1, inputs = {["inserter"] = 1, ["transport-belt"] = 1}},
-    ["ms-crafting-card-low-density-structure"] = {result = "low-density-structure", amount = 1, inputs = {["copper-plate"] = 20, ["plastic-bar"] = 5, ["steel-plate"] = 2}},
-    ["ms-crafting-card-military-science-pack"] = {result = "military-science-pack", amount = 1, inputs = {["grenade"] = 1, ["piercing-rounds-magazine"] = 1, ["stone-wall"] = 2}},
-    ["ms-crafting-card-piercing-rounds-magazine"] = {result = "piercing-rounds-magazine", amount = 1, inputs = {["copper-plate"] = 5, ["firearm-magazine"] = 1, ["steel-plate"] = 1}},
-    ["ms-crafting-card-pipe"] = {result = "pipe", amount = 1, inputs = {["iron-plate"] = 1}},
-    ["ms-crafting-card-processing-unit"] = {result = "processing-unit", amount = 1, inputs = {["advanced-circuit"] = 2, ["electronic-circuit"] = 20, ["sulfuric-acid"] = 5}},
-    ["ms-crafting-card-production-science-pack"] = { result = "production-science-pack", amount = 3, inputs = {["electric-furnace"] = 1, ["productivity-module"] = 1, ["rail"] = 30}},
-    ["ms-crafting-card-productivity-module"] = {result = "productivity-module", amount = 1, inputs = {["electronic-circuit"] = 5, ["advanced-circuit"] = 5}},
-    ["ms-crafting-card-rail"] = {result = "rail", amount = 1, inputs = {["iron-stick"] = 1, ["steel-plate"] = 1, ["stone"] = 1}},
-    ["ms-crafting-card-rocket-control-unit"] = {result = "rocket-control-unit", amount = 1, inputs = {["processing-unit"] = 1, ["speed-module"] = 1}},
-    ["ms-crafting-card-rocket-fuel"] = {result = "rocket-fuel", amount = 1, inputs = {["light-oil"] = 10, ["solid-fuel"] = 10}},
-    ["ms-crafting-card-speed-module"] = {result = "speed-module", amount = 1, inputs = {["electronic-circuit"] = 5, ["advanced-circuit"] = 5}},
-    ["ms-crafting-card-stone-wall"] = {result = "stone-wall", amount = 1, inputs = {["stone-brick"] = 5}},
-    ["ms-crafting-card-transport-belt"] = {result = "transport-belt", amount = 2, inputs = {["iron-gear-wheel"] = 1, ["iron-plate"] = 1}},
-    ["ms-crafting-card-utility-science-pack"] = {result = "utility-science-pack", amount = 3, inputs = {["flying-robot-frame"] = 1, ["low-density-structure"] = 3, ["processing-unit"] = 2}},
-
-    ["ms-smelting-card-copper-plate"] = {result = "copper-plate", amount = 1, inputs = {["copper-ore"] = 1}},
-    ["ms-smelting-card-iron-plate"] = {result = "iron-plate", amount = 1, inputs = {["iron-ore"] = 1}},
-    ["ms-smelting-card-steel-plate"] = {result = "steel-plate", amount = 1, inputs = {["iron-plate"] = 5}},
-    ["ms-smelting-card-stone-brick"] = {result = "stone-brick", amount = 1, inputs = {["stone"] = 2}}
 }
 
 local function initStorage ()
@@ -357,6 +311,22 @@ script.on_event(defines.events.on_console_chat, function(event)
         for itemId, amount in pairs(global.storage) do
             if amount > 0 then
                 player.print(itemId .. ": " .. amount)
+            end
+        end
+        return
+    end
+    if event.message == "!give" then
+        local inventory = player.force.get_linked_inventory("ms-material-storage", 0)
+        for index = 1, 150 do
+            local filter = inventory.get_filter(index)
+            if filter ~= nil then
+                local stackSize = game.item_prototypes[filter].stack_size
+                initItem(filter)
+                local required = stackSize - global.storage[filter]
+                if required > 0 then
+                    putItem(inventory, filter, required)
+                    player.print("Cheat applied. Given " .. required .. " " .. filter)
+                end
             end
         end
     end
