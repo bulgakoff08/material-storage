@@ -29,17 +29,37 @@ data:extend({
     machine("ms-material-combinator", 10, "ms-items"),
 
     -- logistics
+    item("ms-crafting-card-express-splitter", 1, "ms-logistics"),
+    item("ms-crafting-card-express-transport-belt", 1, "ms-logistics"),
+    item("ms-crafting-card-express-underground-belt", 1, "ms-logistics"),
+    item("ms-crafting-card-fast-splitter", 1, "ms-logistics"),
+    item("ms-crafting-card-fast-transport-belt", 1, "ms-logistics"),
+    item("ms-crafting-card-fast-underground-belt", 1, "ms-logistics"),
+    item("ms-crafting-card-splitter", 1, "ms-logistics"),
     item("ms-crafting-card-transport-belt", 1, "ms-logistics"),
+    item("ms-crafting-card-underground-belt", 1, "ms-logistics"),
 
     -- inserters
+    item("ms-crafting-card-fast-inserter", 1, "ms-inserters"),
+    item("ms-crafting-card-filter-inserter", 1, "ms-inserters"),
     item("ms-crafting-card-inserter", 1, "ms-inserters"),
+    item("ms-crafting-card-long-handed-inserter", 1, "ms-inserters"),
+    item("ms-crafting-card-stack-inserter", 1, "ms-inserters"),
 
     -- pipes
     item("ms-crafting-card-pipe", 1, "ms-pipes"),
+    item("ms-crafting-card-pipe-to-ground", 1, "ms-pipes"),
 
     -- buildings other
+    item("ms-crafting-card-assembling-machine-1", 1, "ms-buildings"),
+    item("ms-crafting-card-assembling-machine-2", 1, "ms-buildings"),
+    item("ms-crafting-card-assembling-machine-3", 1, "ms-buildings"),
     item("ms-crafting-card-electric-furnace", 1, "ms-buildings"),
+    item("ms-crafting-card-iron-chest", 1, "ms-buildings"),
+    item("ms-crafting-card-medium-electric-pole", 1, "ms-buildings"),
     item("ms-crafting-card-rail", 1, "ms-buildings"),
+    item("ms-crafting-card-small-lamp", 1, "ms-buildings"),
+    item("ms-crafting-card-steel-chest", 1, "ms-buildings"),
 
     -- tiles
     item("ms-smelting-card-stone-brick", 1, "ms-tiles"),
@@ -118,6 +138,6 @@ if mods["simply-bees"] then
         item("ms-crafting-card-sb-stone-wax", 1, "ms-bees"),
         item("ms-crafting-card-sb-uranium-ore-from-wax", 1, "ms-bees"),
         item("ms-crafting-card-sb-uranium-wax", 1, "ms-bees"),
-        item("ms-crafting-card-sb-wooden-frame", 1, "ms-bees")
+        item("ms-crafting-card-sb-wooden-frame", 1, "ms-bees"),
     })
 end

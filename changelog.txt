@@ -1,3 +1,13 @@
+Version 0.0.4 / 06-09-2023
+Added crafting templates for:
+- Assemblers
+- Belts and Splitters
+- Power Pole
+- Inserters
+- Underground Pipe
+- Chests
+- Lamp
+
 Version 0.0.3 / 04-09-2023
 - Added optional support for mod "Simply Bees"
 - Added Brazilian Translation (thanks to @LUISDASARTIMANHAS)
