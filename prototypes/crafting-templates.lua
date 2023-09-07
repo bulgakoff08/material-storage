@@ -2,7 +2,7 @@ return {
     -- TEMPLATES FOR COPY/PASTE
     -- [""] = {result = "", amount = 1, inputs = {[""] = 1}},
 
-    ["ms-chemical-card-battery"] = {result = "battery", amount = 1, inputs = {["copper-plate"] = 1, ["iron-plate"] = 1, ["sulfuric-acid"] = 20}},
+    ["ms-chemical-card-battery"] = {result = "battery", amount = 1, uncraftable = true, inputs = {["copper-plate"] = 1, ["iron-plate"] = 1, ["sulfuric-acid"] = 20}},
     ["ms-chemical-card-plastic-bar"] = {result = "plastic-bar", amount = 1, inputs = {["coal"] = 1, ["petroleum-gas"] = 20}},
     ["ms-chemical-card-solid-fuel-1"] = {result = "solid-fuel", amount = 1, inputs = {["petroleum-gas"] = 20}},
     ["ms-chemical-card-solid-fuel-2"] = {result = "solid-fuel", amount = 1, inputs = {["light-oil"] = 10}},

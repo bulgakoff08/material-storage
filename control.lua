@@ -3,6 +3,8 @@ local specialItems = {
     "ms-memory-module-t1",
     "ms-memory-module-t2",
     "ms-memory-module-t3",
+    "ms-uncrafting-card",
+    "ms-void-card",
     "ms-material-crystal-charged",
     "ms-material-chest-solar-panel"
 }
@@ -214,6 +216,26 @@ local function craft (cardId)
     global.energy = global.energy - energyUse
 end
 
+local function unCraft (cardId)
+    local recipe = recipes[cardId]
+    if not available(recipe.result, recipe.amount) then
+        return -- quit if nothing to uncraft
+    end
+    local storageRequire = 0
+    for _, count in pairs(recipe.inputs) do
+        storageRequire = storageRequire + count
+    end
+    if storageRequire <= global.antiCapacity and storageRequire <= global.energy then
+        for itemId, count in pairs(recipe.inputs) do
+            initItem(itemId)
+            global.storage[itemId] = global.storage[itemId] + count
+        end
+        global.energy = global.energy - (storageRequire * 4)
+        global.storage[recipe.result] = global.storage[recipe.result] - recipe.amount
+        global.antiCapacity = global.antiCapacity + recipe.amount - storageRequire
+    end
+end
+
 local function putAll (inventory)
     for itemId, amount in pairs(inventory.get_contents()) do
         if canStore(itemId) then
@@ -247,12 +269,17 @@ local function createPlan (inventory)
 end
 
 local function processCrafts (inventory, plan)
+    local uncraftFlag = inventory.get_item_count("ms-uncrafting-card") > 0
     for cardId, amount in pairs(inventory.get_contents()) do
         if recipes[cardId] ~= nil and plan[recipes[cardId].result] ~= nil then
             for _ = 1, amount do
                 if global.energy > 0 then
-                    if not available(recipes[cardId].result, plan[recipes[cardId].result]) then
-                        craft(cardId)
+                    if uncraftFlag then
+                        unCraft(cardId)
+                    else
+                        if not available(recipes[cardId].result, plan[recipes[cardId].result]) then
+                            craft(cardId)
+                        end
                     end
                 end
             end

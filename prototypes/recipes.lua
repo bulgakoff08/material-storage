@@ -1,4 +1,4 @@
-local function type(itemId)
+local function type(itemId) -- todo: this must be moved into common utils
     if itemId == "water" then
         return "fluid"
     end
@@ -48,7 +48,6 @@ local function recipe(category, duration, recipeId, inputs, outputs)
         energy_required = duration,
         ingredients = inputs,
         results = outputs,
-        allow_as_intermediate = false,
         main_product = outputs[1]["name"]
     }
 end
@@ -63,6 +62,9 @@ data:extend({
     recipe("crafting", 1, "ms-memory-module-t1", items("ms-material-crystal-charged", 1, "electronic-circuit", 5, "copper-cable", 10), items("ms-memory-module-t1", 1)),
     recipe("crafting", 1, "ms-memory-module-t2", items("ms-memory-module-t1", 3, "ms-material-crystal-charged", 3, "advanced-circuit", 5), items("ms-memory-module-t2", 1)),
     recipe("crafting", 1, "ms-memory-module-t3", items("ms-memory-module-t2", 3, "ms-material-crystal-charged", 3, "processing-unit", 5), items("ms-memory-module-t3", 1)),
+
+    recipe("crafting", 1, "ms-uncrafting-card", items("assembling-machine-3", 1, "ms-material-crystal-charged", 4, "processing-unit", 50), items("ms-uncrafting-card", 1)),
+
 
     -- Science T1 / T2
     recipe("crafting", 1, "ms-crafting-card-automation-science-pack", items("automation-science-pack", 200, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-automation-science-pack", 1)),
