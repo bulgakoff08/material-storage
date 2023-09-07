@@ -1,3 +1,6 @@
+Version 0.0.5 / 07-09-2023
+Fixed issue that optional dependency to "Simply Bees" was not really optional
+
 Version 0.0.4 / 07-09-2023
 Added uncrafting card
 Added crafting templates for:
