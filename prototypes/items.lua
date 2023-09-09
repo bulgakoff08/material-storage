@@ -19,6 +19,7 @@ end
 
 data:extend({
     -- items 1st row
+    item("ms-barreling-card", 1, "ms-items"),
     item("ms-material-chest-solar-panel", 1, "ms-items"),
     item("ms-material-crystal", 50, "ms-items"),
     item("ms-material-crystal-charged", 50, "ms-items"),
@@ -26,8 +27,8 @@ data:extend({
     item("ms-memory-module-t2", 1, "ms-items"),
     item("ms-memory-module-t3", 1, "ms-items"),
     item("ms-uncrafting-card", 1, "ms-items"),
-    machine("ms-material-storage", 10, "ms-items"),
     machine("ms-material-combinator", 10, "ms-items"),
+    machine("ms-material-storage", 10, "ms-items"),
 
     -- logistics
     item("ms-crafting-card-express-splitter", 1, "ms-logistics"),
@@ -76,6 +77,12 @@ data:extend({
     item("ms-digital-petroleum-gas", 4, "ms-fluids"),
     item("ms-digital-sulfuric-acid", 4, "ms-fluids"),
     item("ms-digital-water", 4, "ms-fluids"),
+
+    item("ms-chemical-card-advanced-oil-processing", 1, "ms-fluids"),
+    item("ms-chemical-card-heavy-oil-cracking", 1, "ms-fluids"),
+    item("ms-chemical-card-light-oil-cracking", 1, "ms-fluids"),
+    item("ms-chemical-card-lubricant", 1, "ms-fluids"),
+    item("ms-chemical-card-sulfuric-acid", 1, "ms-fluids"),
 
     -- plates
     item("ms-smelting-card-copper-plate", 1, "ms-plates"),
