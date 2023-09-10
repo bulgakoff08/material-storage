@@ -1,19 +1,19 @@
 local utils = require("prototypes.commons")
 local recipes = require("prototypes.crafting-templates")
-local specialItems = {
-    "ms-barreling-card",
-    "ms-chemical-card-advanced-oil-processing",
-    "ms-chemical-card-heavy-oil-cracking",
-    "ms-chemical-card-light-oil-cracking",
-    "ms-chemical-card-lubricant",
-    "ms-chemical-card-sulfuric-acid",
-    "ms-material-chest-solar-panel",
-    "ms-material-crystal-charged",
-    "ms-memory-module-t1",
-    "ms-memory-module-t2",
-    "ms-memory-module-t3",
-    "ms-uncrafting-card",
-    "ms-void-card"
+local modules = {
+    ["ms-barreling-card"] = 0,
+    ["ms-chemical-card-advanced-oil-processing"] = 0,
+    ["ms-chemical-card-heavy-oil-cracking"] = 0,
+    ["ms-chemical-card-light-oil-cracking"] = 0,
+    ["ms-chemical-card-lubricant"] = 0,
+    ["ms-chemical-card-sulfuric-acid"] = 0,
+    ["ms-material-chest-solar-panel"] = 0,
+    ["ms-material-crystal-charged"] = 0,
+    ["ms-memory-module-t1"] = 0,
+    ["ms-memory-module-t2"] = 0,
+    ["ms-memory-module-t3"] = 0,
+    ["ms-uncrafting-card"] = 0,
+    ["ms-void-card"] = 0
 }
 
 local function initStorage ()
@@ -100,10 +100,8 @@ local function canStore (itemId)
     if recipes[itemId] ~= nil then
         return false
     end
-    for _, specialId in pairs(specialItems) do
-        if specialId == itemId then
-            return false
-        end
+    if modules[itemId] ~= nil then
+        return false
     end
     return true
 end
