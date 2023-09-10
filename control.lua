@@ -1,12 +1,18 @@
 local recipes = require("prototypes.crafting-templates")
 local specialItems = {
+    "ms-barreling-card",
+    "ms-chemical-card-advanced-oil-processing",
+    "ms-chemical-card-heavy-oil-cracking",
+    "ms-chemical-card-light-oil-cracking",
+    "ms-chemical-card-lubricant",
+    "ms-chemical-card-sulfuric-acid",
+    "ms-material-chest-solar-panel",
+    "ms-material-crystal-charged",
     "ms-memory-module-t1",
     "ms-memory-module-t2",
     "ms-memory-module-t3",
     "ms-uncrafting-card",
-    "ms-void-card",
-    "ms-material-crystal-charged",
-    "ms-material-chest-solar-panel"
+    "ms-void-card"
 }
 
 local function initStorage ()
@@ -140,31 +146,59 @@ local function totalCount ()
     return total
 end
 
-local digitalFluids = {
-    ["ms-digital-heavy-oil"] = "heavy-oil",
-    ["ms-digital-light-oil"] = "light-oil",
-    ["ms-digital-lubricant"] = "lubricant",
-    ["ms-digital-petroleum-gas"] = "petroleum-gas",
-    ["ms-digital-sulfuric-acid"] = "sulfuric-acid",
-    ["ms-digital-water"] = "water"
+local barrels = {
+    ["crude-oil-barrel"] = "crude-oil",
+    ["heavy-oil-barrel"] = "heavy-oil",
+    ["light-oil-barrel"] = "light-oil",
+    ["lubricant-barrel"] = "lubricant",
+    ["petroleum-gas-barrel"] = "petroleum-gas",
+    ["sulfuric-acid-barrel"] = "sulfuric-acid",
+    ["water-barrel"] = "water"
 }
 
-local function putFluid (inventory, itemId)
-    if global.capacity - global.antiCapacity >= 1024 then
-        initItem(digitalFluids[itemId])
-        -- only put 1024 fluid if there is less than 1024 fluid already. That means only 2048 each fluid max cen be stored
-        if global.storage[digitalFluids[itemId]] <= 1024 then
-            global.storage[digitalFluids[itemId]] = global.storage[digitalFluids[itemId]] + 1024
-            global.antiCapacity = global.antiCapacity + 1024
+local refining = {
+    ["ms-chemical-card-advanced-oil-processing"] = {["inputs"] = {["crude-oil"] = 100, ["water"] = 50}, ["outputs"] = {["petroleum-gas"] = 55, ["heavy-oil"] = 25, ["light-oil"] = 45}},
+    ["ms-chemical-card-heavy-oil-cracking"] = {["inputs"] = {["heavy-oil"] = 40, ["water"] = 30}, ["outputs"] = {["light-oil"] = 30}},
+    ["ms-chemical-card-light-oil-cracking"] = {["inputs"] = {["light-oil"] = 30, ["water"] = 30}, ["outputs"] = {["petroleum-gas"] = 20}},
+    ["ms-chemical-card-lubricant"] = {["inputs"] = {["heavy-oil"] = 10}, ["outputs"] = {["lubricant"] = 10}},
+    ["ms-chemical-card-sulfuric-acid"] = {["inputs"] = {["iron-plate"] = 1, ["sulfur"] = 5, ["water"] = 100}, ["outputs"] = {["sulfuric-acid"] = 50}}
+}
+
+local function available (itemId, count)
+    return global.storage[itemId] ~= nil and global.storage[itemId] >= count
+end
+
+local function getBarrel (inventory, itemId, amount)
+    for _ = 1, amount do
+        if available(barrels[itemId], 50) and available("empty-barrel", 1) then
+            global.storage[barrels[itemId]] = global.storage[barrels[itemId]] - 50
+            global.storage["empty-barrel"] = global.storage["empty-barrel"] - 1
+            global.antiCapacity = global.antiCapacity - 51
+            inventory.insert({name = itemId, count = 1})
+        end
+    end
+end
+
+local function putBarrel (inventory, itemId, amount)
+    initItem(barrels[itemId])
+    initItem("empty-barrel")
+    for _ = 1, amount do
+        if global.capacity - global.antiCapacity > 51 then
+            global.storage[barrels[itemId]] = global.storage[barrels[itemId]] + 50
+            global.storage["empty-barrel"] = global.storage["empty-barrel"] + 1
+            global.antiCapacity = global.antiCapacity + 51
             inventory.remove({name = itemId, count = 1})
+        else
+            return
         end
     end
 end
 
 local function putItem (inventory, itemId, amount)
-    if digitalFluids[itemId] ~= nil then
-        -- processing one at the time
-        putFluid(inventory, itemId)
+    if barrels[itemId] ~= nil then
+        if inventory.get_item_count("ms-barreling-card") > 0 then
+            putBarrel(inventory, itemId, amount)
+        end
         return
     end
     local freeSpace = global.capacity - global.antiCapacity
@@ -181,6 +215,12 @@ local function putItem (inventory, itemId, amount)
 end
 
 local function getItem (inventory, itemId, amount)
+    if barrels[itemId] ~= nil then
+        if inventory.get_item_count("ms-barreling-card") > 0 then
+            getBarrel(inventory, itemId, amount)
+        end
+        return
+    end
     local desiredAmount = amount
     initItem(itemId)
     if global.storage[itemId] < desiredAmount then
@@ -191,10 +231,6 @@ local function getItem (inventory, itemId, amount)
         global.antiCapacity = global.antiCapacity - desiredAmount
         inventory.insert({name = itemId, count = desiredAmount})
     end
-end
-
-local function available (itemId, count)
-    return global.storage[itemId] ~= nil and global.storage[itemId] >= count
 end
 
 local function craft (cardId)
@@ -236,6 +272,33 @@ local function unCraft (cardId)
     end
 end
 
+local function refine (cardId)
+    local recipe = refining[cardId];
+    local energyRequire = 0
+    for fluidId, count in pairs(recipe.inputs) do
+        energyRequire = energyRequire + count
+        if not available(fluidId, count) then
+            return
+        end
+    end
+    for fluidId, count in pairs(recipe.outputs) do
+        initItem(fluidId)
+        if global.storage[fluidId] + count > 2048 then
+            return
+        end
+    end
+    if global.energy < energyRequire / 10 then
+        return
+    end
+    for fluidId, count in pairs(recipe.inputs) do
+        global.storage[fluidId] = global.storage[fluidId] - count
+    end
+    for fluidId, count in pairs(recipe.outputs) do
+        global.storage[fluidId] = global.storage[fluidId] + count
+    end
+    global.energy = global.energy - math.floor(energyRequire / 10)
+end
+
 local function putAll (inventory)
     for itemId, amount in pairs(inventory.get_contents()) do
         if canStore(itemId) then
@@ -271,9 +334,9 @@ end
 local function processCrafts (inventory, plan)
     local uncraftFlag = inventory.get_item_count("ms-uncrafting-card") > 0
     for cardId, amount in pairs(inventory.get_contents()) do
-        if recipes[cardId] ~= nil and plan[recipes[cardId].result] ~= nil then
-            for _ = 1, amount do
-                if global.energy > 0 then
+        if global.energy > 0 then
+            if recipes[cardId] ~= nil and plan[recipes[cardId].result] ~= nil then
+                for _ = 1, amount do
                     if uncraftFlag then
                         unCraft(cardId)
                     else
@@ -281,6 +344,10 @@ local function processCrafts (inventory, plan)
                             craft(cardId)
                         end
                     end
+                end
+            elseif refining[cardId] ~= nil then
+                for _ = 1, amount do
+                    refine(cardId)
                 end
             end
         end
@@ -356,5 +423,12 @@ script.on_event(defines.events.on_console_chat, function(event)
                 end
             end
         end
+    end
+    if event.message == "!clear" then
+        player.print("Cleaning the storage")
+        for itemId, _ in pairs(global.storage) do
+            global.storage[itemId] = nil
+        end
+        global.antiCapacity = 0
     end
 end)

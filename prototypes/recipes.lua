@@ -53,18 +53,16 @@ local function recipe(category, duration, recipeId, inputs, outputs)
 end
 
 data:extend({
-    recipe("advanced-crafting", 30, "ms-material-crystal", items("stone", 10), items("ms-material-crystal", 1)),
     recipe("advanced-crafting", 120, "ms-material-crystal-charged", items("ms-material-crystal", 1), items("ms-material-crystal-charged", 1)),
-    recipe("crafting", 1, "ms-material-storage", items("iron-chest", 1, "ms-material-crystal-charged", 10, "ms-memory-module-t1", 1, "electronic-circuit", 5), items("ms-material-storage", 1)),
-    recipe("crafting", 1, "ms-material-combinator", items("constant-combinator", 1, "ms-material-crystal-charged", 1), items("ms-material-combinator", 1)),
+    recipe("advanced-crafting", 30, "ms-material-crystal", items("stone", 10), items("ms-material-crystal", 1)),
+    recipe("crafting", 1, "ms-barreling-card", items("empty-barrel", 100, "assembling-machine-2", 1, "ms-material-crystal-charged", 1), items("ms-barreling-card", 1)),
     recipe("crafting", 1, "ms-material-chest-solar-panel", items("ms-material-crystal-charged", 5, "solar-panel", 10), items("ms-material-chest-solar-panel", 1)),
-
+    recipe("crafting", 1, "ms-material-combinator", items("constant-combinator", 1, "ms-material-crystal-charged", 1), items("ms-material-combinator", 1)),
+    recipe("crafting", 1, "ms-material-storage", items("iron-chest", 1, "ms-material-crystal-charged", 10, "ms-memory-module-t1", 1, "electronic-circuit", 5), items("ms-material-storage", 1)),
     recipe("crafting", 1, "ms-memory-module-t1", items("ms-material-crystal-charged", 1, "electronic-circuit", 5, "copper-cable", 10), items("ms-memory-module-t1", 1)),
     recipe("crafting", 1, "ms-memory-module-t2", items("ms-memory-module-t1", 3, "ms-material-crystal-charged", 3, "advanced-circuit", 5), items("ms-memory-module-t2", 1)),
     recipe("crafting", 1, "ms-memory-module-t3", items("ms-memory-module-t2", 3, "ms-material-crystal-charged", 3, "processing-unit", 5), items("ms-memory-module-t3", 1)),
-
     recipe("crafting", 1, "ms-uncrafting-card", items("assembling-machine-3", 1, "ms-material-crystal-charged", 4, "processing-unit", 50), items("ms-uncrafting-card", 1)),
-
 
     -- Science T1 / T2
     recipe("crafting", 1, "ms-crafting-card-automation-science-pack", items("automation-science-pack", 200, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-automation-science-pack", 1)),
@@ -89,7 +87,7 @@ data:extend({
     recipe("crafting", 1, "ms-crafting-card-chemical-science-pack", items("chemical-science-pack", 200, "assembling-machine-2", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-chemical-science-pack", 1)),
     recipe("crafting", 1, "ms-crafting-card-advanced-circuit", items("advanced-circuit", 200, "assembling-machine-2", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-advanced-circuit", 1)),
     recipe("crafting", 1, "ms-crafting-card-engine-unit", items("engine-unit", 50, "assembling-machine-2", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-engine-unit", 1)),
-    recipe("crafting", 1, "ms-chemical-card-sulfur", items("sulfur", 100, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-sulfur", 1)),
+    recipe("crafting", 1, "ms-chemical-card-sulfur", items("sulfur", 50, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-sulfur", 1)),
     recipe("crafting", 1, "ms-chemical-card-plastic-bar", items("plastic-bar", 100, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-plastic-bar", 1)),
     recipe("crafting", 1, "ms-crafting-card-pipe", items("pipe", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-pipe", 1)),
     recipe("crafting", 1, "ms-smelting-card-steel-plate", items("steel-plate", 100, "electric-furnace", 1, "ms-material-crystal-charged", 1), items("ms-smelting-card-steel-plate", 1)),
@@ -117,12 +115,11 @@ data:extend({
     recipe("crafting", 1, "ms-crafting-card-speed-module", items("speed-module", 50, "assembling-machine-2", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-speed-module", 1)),
 
     -- Fluids
-    recipe("crafting-with-fluid", 30, "ms-digital-heavy-oil", items("heavy-oil", 1024), items("ms-digital-heavy-oil", 1)),
-    recipe("crafting-with-fluid", 30, "ms-digital-light-oil", items("light-oil", 1024), items("ms-digital-light-oil", 1)),
-    recipe("crafting-with-fluid", 30, "ms-digital-lubricant", items("lubricant", 1024), items("ms-digital-lubricant", 1)),
-    recipe("crafting-with-fluid", 30, "ms-digital-petroleum-gas", items("petroleum-gas", 1024), items("ms-digital-petroleum-gas", 1)),
-    recipe("crafting-with-fluid", 30, "ms-digital-sulfuric-acid", items("sulfuric-acid", 1024), items("ms-digital-sulfuric-acid", 1)),
-    recipe("crafting-with-fluid", 30, "ms-digital-water", items("water", 1024), items("ms-digital-water", 1)),
+    recipe("crafting-with-fluid", 1, "ms-chemical-card-advanced-oil-processing", items("crude-oil", 1000, "oil-refinery", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-advanced-oil-processing", 1)),
+    recipe("crafting-with-fluid", 1, "ms-chemical-card-heavy-oil-cracking", items("heavy-oil", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-heavy-oil-cracking", 1)),
+    recipe("crafting-with-fluid", 1, "ms-chemical-card-light-oil-cracking", items("light-oil", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-light-oil-cracking", 1)),
+    recipe("crafting-with-fluid", 1, "ms-chemical-card-lubricant", items("lubricant", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-lubricant", 1)),
+    recipe("crafting-with-fluid", 1, "ms-chemical-card-sulfuric-acid", items("sulfuric-acid", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-sulfuric-acid", 1)),
 
     -- 0.0.4
     recipe("crafting", 1, "ms-crafting-card-assembling-machine-1", items("assembling-machine-1", 51), items("ms-crafting-card-assembling-machine-1", 1)),
