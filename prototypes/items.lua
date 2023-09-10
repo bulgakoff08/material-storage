@@ -27,8 +27,16 @@ data:extend({
     item("ms-memory-module-t2", 1, "ms-items"),
     item("ms-memory-module-t3", 1, "ms-items"),
     item("ms-uncrafting-card", 1, "ms-items"),
-    machine("ms-material-combinator", 10, "ms-items"),
-    machine("ms-material-storage", 10, "ms-items"),
+
+    -- machines
+    machine("ms-material-combinator", 10, "ms-machines"),
+    machine("ms-material-storage", 10, "ms-machines"),
+    machine("ms-material-interface-a", 10, "ms-machines"),
+    machine("ms-material-interface-b", 10, "ms-machines"),
+    machine("ms-material-interface-c", 10, "ms-machines"),
+    machine("ms-material-interface-d", 10, "ms-machines"),
+    machine("ms-material-interface-e", 10, "ms-machines"),
+    machine("ms-material-interface-f", 10, "ms-machines"),
 
     -- logistics
     item("ms-crafting-card-express-splitter", 1, "ms-logistics"),

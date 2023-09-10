@@ -1,3 +1,8 @@
+Version 0.0.7 / 10-09-2023
+- Added Material Interfaces
+- Slightly optimized code
+- Fixed Crafting Templates from 0.0.4 did not have Changed Material Crystal in recipes
+
 Version 0.0.6 / 09-09-2023
 - Updated Brazilian translation
 - Reworked fluids system, now you can barrel and un-barrel fluids with Barreling Card

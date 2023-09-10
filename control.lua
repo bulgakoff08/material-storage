@@ -1,3 +1,4 @@
+local utils = require("prototypes.commons")
 local recipes = require("prototypes.crafting-templates")
 local specialItems = {
     "ms-barreling-card",
@@ -33,31 +34,6 @@ local function initStorage ()
     end
 end
 
-local function type(itemId) -- todo: this must be moved into common utils
-    if itemId == "water" then
-        return "fluid"
-    end
-    if itemId == "crude-oil" then
-        return "fluid"
-    end
-    if itemId == "heavy-oil" then
-        return "fluid"
-    end
-    if itemId == "light-oil" then
-        return "fluid"
-    end
-    if itemId == "lubricant" then
-        return "fluid"
-    end
-    if itemId == "petroleum-gas" then
-        return "fluid"
-    end
-    if itemId == "sulfuric-acid" then
-        return "fluid"
-    end
-    return "item"
-end
-
 local function setSignals (combinator)
     local control = combinator.get_control_behavior()
     local signals = {}
@@ -67,7 +43,7 @@ local function setSignals (combinator)
     table.insert(signals, {count = 100 - (global.antiCapacity / global.capacity * 100), index = 4, signal = {name = "signal-P", type = "virtual"}})
     local index = 5
     for name, count in pairs(global.storage) do
-        table.insert(signals, {count = count, index = index, signal = {name = name, type = type(name)}})
+        table.insert(signals, {count = count, index = index, signal = {name = name, type = utils.itemType(name)}})
         index = index + 1
     end
     control.parameters = signals
@@ -145,6 +121,7 @@ local function totalCount ()
     end
     return total
 end
+
 
 local barrels = {
     ["crude-oil-barrel"] = "crude-oil",
@@ -316,9 +293,9 @@ local function refillAll (inventory, plan)
     end
 end
 
-local function createPlan (inventory)
+local function createPlan (inventory, inventorySize)
     local plan = {}
-    for index = 1, 150 do
+    for index = 1, inventorySize do
         local filter = inventory.get_filter(index)
         if filter ~= nil then
             if plan[filter] == nil then
@@ -389,8 +366,16 @@ script.on_nth_tick(60, function()
         end
     end
     putAll(inventory)
-    local plan = createPlan(inventory)
+    local plan = createPlan(inventory, 150)
     processCrafts(inventory, plan)
+
+    for _, interfaceId in pairs({"a", "b", "c", "d", "e", "f"}) do
+        local interfaceInventory = player.force.get_linked_inventory(
+                "ms-material-interface-" .. interfaceId, 0)
+        putAll(interfaceInventory)
+        refillAll(interfaceInventory, createPlan(interfaceInventory, 10))
+    end
+
     refillAll(inventory, plan)
     if global.energy < 0 then
         global.energy = 0

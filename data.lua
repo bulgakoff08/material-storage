@@ -21,9 +21,15 @@ data:extend({
     },
     {
         type = "item-subgroup",
-        name = "ms-logistics",
+        name = "ms-machines",
         group = "ms-material-storage",
         order = "b-a"
+    },
+    {
+        type = "item-subgroup",
+        name = "ms-logistics",
+        group = "ms-material-storage",
+        order = "c-a"
     },
     {
         type = "item-subgroup",
@@ -35,60 +41,60 @@ data:extend({
         type = "item-subgroup",
         name = "ms-pipes",
         group = "ms-material-storage",
-        order = "c-a"
+        order = "e-a"
     },
     {
         type = "item-subgroup",
         name = "ms-buildings",
         group = "ms-material-storage",
-        order = "e-a"
+        order = "f-a"
     },
     {
         type = "item-subgroup",
         name = "ms-tiles",
         group = "ms-material-storage",
-        order = "f-a"
+        order = "g-a"
     },
     {
         type = "item-subgroup",
         name = "ms-modules",
         group = "ms-material-storage",
-        order = "g-a"
+        order = "h-a"
     },
     {
         type = "item-subgroup",
         name = "ms-fluids",
         group = "ms-material-storage",
-        order = "h-a"
+        order = "i-a"
     },
     {
         type = "item-subgroup",
         name = "ms-plates",
         group = "ms-material-storage",
-        order = "i-a"
+        order = "j-a"
     },
     {
         type = "item-subgroup",
         name = "ms-parts",
         group = "ms-material-storage",
-        order = "j-a"
+        order = "k-a"
     },
     {
         type = "item-subgroup",
         name = "ms-science",
         group = "ms-material-storage",
-        order = "k-a"
+        order = "l-a"
     },
     {
         type = "item-subgroup",
         name = "ms-military",
         group = "ms-material-storage",
-        order = "l-a"
+        order = "m-a"
     },
     {
         type = "item-subgroup",
         name = "ms-bees",
         group = "ms-material-storage",
-        order = "m-a"
+        order = "n-a"
     }
 })
