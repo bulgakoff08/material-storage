@@ -65,20 +65,21 @@ return {
     ["ms-smelting-card-stone-brick"] = {result = "stone-brick", amount = 1, inputs = {["stone"] = 2}},
 
     -- adding here without any check because this is not validated
-    ["ms-crafting-card-sb-coal-from-wax"] = {result = "coal", amount = 1, inputs = {["sb-coal-wax"] = 1}},
-    ["ms-crafting-card-sb-copper-ore-from-wax"] = {result = "copper-ore", amount = 1, inputs = {["sb-copper-wax"] = 1}},
-    ["ms-crafting-card-sb-iron-ore-from-wax"] = {result = "iron-ore", amount = 1, inputs = {["sb-iron-wax"] = 1}},
-    ["ms-crafting-card-sb-stone-from-wax"] = {result = "stone", amount = 1, inputs = {["sb-stone-wax"] = 1}},
-    ["ms-crafting-card-sb-uranium-ore-from-wax"] = {result = "uranium-ore", amount = 1, inputs = {["sb-uranium-wax"] = 1, ["sulfuric-acid"] = 2}},
+    ["ms-crafting-card-sb-coal-piece"] = {result = "sb-coal-piece", amount = 4, secondaryResult = "sb-coal-piece", secondaryAmount = 0.75, inputs = {["sb-coal-honey-comb"] = 1}},
+    ["ms-crafting-card-sb-copper-nugget"] = {result = "sb-copper-nugget", amount = 4, secondaryResult = "sb-copper-nugget", secondaryAmount = 0.75, inputs = {["sb-copper-honey-comb"] = 1}},
+    ["ms-crafting-card-sb-iron-nugget"] = {result = "sb-iron-nugget", amount = 4, secondaryResult = "sb-iron-nugget", secondaryAmount = 0.75, inputs = {["sb-iron-honey-comb"] = 1}},
+    ["ms-crafting-card-sb-stone-piece"] = {result = "sb-stone-piece", amount = 4, secondaryResult = "sb-stone-piece", secondaryAmount = 0.75, inputs = {["sb-stone-honey-comb"] = 1}},
+    ["ms-crafting-card-sb-uranium-nugget"] = {result = "sb-uranium-nugget", amount = 1, secondaryResult = "sb-uranium-nugget", secondaryAmount = 0.75, inputs = {["sb-uranium-honey-comb"] = 1}},
 
-    ["ms-crafting-card-sb-coal-wax"] = {result = "sb-coal-wax", amount = 1, inputs = {["sb-coal-honey-comb"] = 1}},
-    ["ms-crafting-card-sb-copper-wax"] = {result = "sb-copper-wax", amount = 1, inputs = {["sb-copper-honey-comb"] = 1}},
-    ["ms-crafting-card-sb-iron-wax"] = {result = "sb-iron-wax", amount = 1, inputs = {["sb-iron-honey-comb"] = 1}},
-    ["ms-crafting-card-sb-stone-wax"] = {result = "sb-stone-wax", amount = 1, inputs = {["sb-stone-honey-comb"] = 1}},
-    ["ms-crafting-card-sb-uranium-wax"] = {result = "sb-uranium-wax", amount = 1, inputs = {["sb-uranium-honey-comb"] = 1}},
+    ["ms-crafting-card-sb-coal-from-wax"] = {result = "coal", amount = 1, inputs = {["sb-coal-piece"] = 4}},
+    ["ms-crafting-card-sb-copper-ore-from-wax"] = {result = "copper-ore", amount = 1, inputs = {["sb-copper-nugget"] = 4}},
+    ["ms-crafting-card-sb-iron-ore-from-wax"] = {result = "iron-ore", amount = 1, inputs = {["sb-iron-nugget"] = 4}},
+    ["ms-crafting-card-sb-stone-from-wax"] = {result = "stone", amount = 1, inputs = {["sb-stone-piece"] = 4}},
+    ["ms-crafting-card-sb-uranium-ore-from-wax"] = {result = "uranium-ore", amount = 1, inputs = {["sb-uranium-nugget"] = 4, ["sulfuric-acid"] = 2}},
 
-    ["ms-crafting-card-sb-honey-cube"] = {result = "sb-honey-cube", amount = 1, inputs = {["sb-honey-comb"] = 5}},
+    ["ms-crafting-card-sb-honey-cube"] = {result = "sb-honey-cube", amount = 1, secondaryResult = "sb-wax", secondaryAmount = 5, inputs = {["sb-honey-comb"] = 5}},
     ["ms-crafting-card-sb-solid-fuel-from-wax"] = {result = "solid-fuel", amount = 1, inputs = {["sb-wax"] = 10}},
     ["ms-crafting-card-sb-wax"] = {result = "sb-wax", amount = 5, inputs = {["sb-honey-comb"] = 5}},
     ["ms-crafting-card-sb-wooden-frame"] = {result = "sb-wooden-frame", amount = 5, inputs = {["wood"] = 1}},
+    ["ms-crafting-card-sb-wooden-repaired-frame"] = {result = "sb-wooden-frame", amount = 1, inputs = {["sb-broken-frame"] = 3}},
 }

@@ -1,3 +1,7 @@
+Version 0.0.8 / 12-09-2023
+- Compatibility with new mechanics of mod "Simply Bees"
+- Fixed issue when game crashes if storage contains items from removed mod
+
 Version 0.0.7 / 10-09-2023
 - Added Material Interfaces
 - Slightly optimized code
@@ -6,7 +10,7 @@ Version 0.0.7 / 10-09-2023
 Version 0.0.6 / 09-09-2023
 - Updated Brazilian translation
 - Reworked fluids system, now you can barrel and un-barrel fluids with Barreling Card
-- Added Advanced Oil processing, Heavy Oil cracking and Light Lil cracking
+- Added Advanced Oil processing, Heavy Oil cracking and Light Oil cracking
 - Added Chemical Templates for Lubricant and Sulfuric Acid
 
 Version 0.0.5 / 07-09-2023

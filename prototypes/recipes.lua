@@ -130,17 +130,18 @@ if mods["simply-bees"] then
     data:extend({
         -- Bees
         recipe("crafting", 1, "ms-crafting-card-sb-coal-from-wax", items("coal", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-coal-from-wax", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-coal-wax", items("sb-coal-wax", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-coal-wax", 1)),
+        recipe("crafting", 1, "ms-crafting-card-sb-coal-piece", items("sb-thermal-centrifuge", 1, "sb-coal-piece", 150), items("ms-crafting-card-sb-coal-piece", 1)),
+        recipe("crafting", 1, "ms-crafting-card-sb-copper-nugget", items("sb-thermal-centrifuge", 1, "sb-copper-nugget", 150), items("ms-crafting-card-sb-copper-nugget", 1)),
         recipe("crafting", 1, "ms-crafting-card-sb-copper-ore-from-wax", items("copper-ore", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-copper-ore-from-wax", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-copper-wax", items("sb-copper-wax", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-copper-wax", 1)),
         recipe("crafting", 1, "ms-crafting-card-sb-honey-cube", items("sb-honey-cube", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-honey-cube", 1)),
+        recipe("crafting", 1, "ms-crafting-card-sb-iron-nugget", items("sb-thermal-centrifuge", 1, "sb-iron-nugget", 150), items("ms-crafting-card-sb-iron-nugget", 1)),
         recipe("crafting", 1, "ms-crafting-card-sb-iron-ore-from-wax", items("iron-ore", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-iron-ore-from-wax", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-iron-wax", items("sb-iron-wax", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-iron-wax", 1)),
         recipe("crafting", 1, "ms-crafting-card-sb-solid-fuel-from-wax", items("solid-fuel", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-solid-fuel-from-wax", 1)),
         recipe("crafting", 1, "ms-crafting-card-sb-stone-from-wax", items("stone", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-stone-from-wax", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-stone-wax", items("sb-stone-wax", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-stone-wax", 1)),
+        recipe("crafting", 1, "ms-crafting-card-sb-stone-piece", items("sb-thermal-centrifuge", 1, "sb-stone-piece", 150), items("ms-crafting-card-sb-stone-piece", 1)),
+        recipe("crafting", 1, "ms-crafting-card-sb-uranium-nugget", items("sb-thermal-centrifuge", 1, "sb-uranium-nugget", 150), items("ms-crafting-card-sb-uranium-nugget", 1)),
         recipe("crafting", 1, "ms-crafting-card-sb-uranium-ore-from-wax", items("uranium-ore", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-uranium-ore-from-wax", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-uranium-wax", items("sb-uranium-wax", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-uranium-wax", 1)),
         recipe("crafting", 1, "ms-crafting-card-sb-wooden-frame", items("sb-wooden-frame", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-wooden-frame", 1)),
+        recipe("crafting", 1, "ms-crafting-card-sb-wooden-repaired-frame", items("sb-wooden-frame", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-wooden-repaired-frame", 1)),
     })
 end

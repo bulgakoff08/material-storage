@@ -43,8 +43,10 @@ local function setSignals (combinator)
     table.insert(signals, {count = 100 - (global.antiCapacity / global.capacity * 100), index = 4, signal = {name = "signal-P", type = "virtual"}})
     local index = 5
     for name, count in pairs(global.storage) do
-        table.insert(signals, {count = count, index = index, signal = {name = name, type = utils.itemType(name)}})
-        index = index + 1
+        if count > 0 then
+            table.insert(signals, {count = count, index = index, signal = {name = name, type = utils.itemType(name)}})
+            index = index + 1
+        end
     end
     control.parameters = signals
 end
@@ -208,6 +210,16 @@ local function getItem (inventory, itemId, amount)
     end
 end
 
+local function calculateAmount (amount)
+    if amount >= 1 then
+        return amount
+    end
+    if math.random(1, 100) < amount * 100 then
+        return 1
+    end
+    return 0
+end
+
 local function craft (cardId)
     local recipe = recipes[cardId]
     local energyUse = 1
@@ -225,6 +237,14 @@ local function craft (cardId)
     global.storage[recipe.result] = global.storage[recipe.result] + recipe.amount
     global.antiCapacity = global.antiCapacity + recipe.amount
     global.energy = global.energy - energyUse
+    if recipe.secondaryResult ~= nil then
+        initItem(recipe.secondaryResult)
+        local amount = calculateAmount(recipe.secondaryAmount)
+        if amount > 0 then
+            global.storage[recipe.secondaryResult] = global.storage[recipe.secondaryResult] + amount
+            global.energy = global.energy - amount
+        end
+    end
 end
 
 local function unCraft (cardId)
@@ -328,6 +348,17 @@ local function processCrafts (inventory, plan)
         end
     end
 end
+
+local function storageCleanup ()
+    for itemId, amount in pairs(global.storage) do
+        if game.item_prototypes[itemId] == nil then
+            global.storage[itemId] = nil
+            global.antiCapacity = global.antiCapacity - amount
+        end
+    end
+end
+script.on_init(storageCleanup)
+script.on_configuration_changed(storageCleanup)
 
 script.on_nth_tick(600, function()
     initStorage()
