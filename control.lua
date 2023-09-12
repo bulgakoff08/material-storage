@@ -350,6 +350,9 @@ local function processCrafts (inventory, plan)
 end
 
 local function storageCleanup ()
+    if global.storage == nil then
+        return
+    end
     for itemId, amount in pairs(global.storage) do
         if game.item_prototypes[itemId] == nil then
             global.storage[itemId] = nil
