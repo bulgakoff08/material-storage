@@ -1,3 +1,7 @@
+Version 0.1.0 / 13-09-2023
+- Added three tiers of Crafting Expansion Cards
+- Completely rewritten code
+
 Version 0.0.9 / 12-09-2023
 - Fixed crash on load of save file where mod was not installed before
 

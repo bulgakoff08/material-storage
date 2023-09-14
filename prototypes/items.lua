@@ -27,6 +27,9 @@ data:extend({
     item("ms-memory-module-t2", 1, "ms-items"),
     item("ms-memory-module-t3", 1, "ms-items"),
     item("ms-uncrafting-card", 1, "ms-items"),
+    item("ms-crafting-expansion-card-t1", 1, "ms-items"),
+    item("ms-crafting-expansion-card-t2", 1, "ms-items"),
+    item("ms-crafting-expansion-card-t3", 1, "ms-items"),
 
     -- machines
     machine("ms-material-combinator", 10, "ms-machines"),

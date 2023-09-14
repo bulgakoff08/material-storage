@@ -41,6 +41,10 @@ data:extend({
     recipe("crafting", 1, "ms-memory-module-t3", items("ms-memory-module-t2", 3, "ms-material-crystal-charged", 3, "processing-unit", 5), items("ms-memory-module-t3", 1)),
     recipe("crafting", 1, "ms-uncrafting-card", items("assembling-machine-3", 1, "ms-material-crystal-charged", 4, "processing-unit", 50), items("ms-uncrafting-card", 1)),
 
+    recipe("crafting", 1, "ms-crafting-expansion-card-t1", items("assembling-machine-1", 50, "ms-material-crystal-charged", 50), items("ms-crafting-expansion-card-t1", 1)),
+    recipe("crafting", 1, "ms-crafting-expansion-card-t2", items("assembling-machine-2", 50, "ms-material-crystal-charged", 50), items("ms-crafting-expansion-card-t2", 1)),
+    recipe("crafting", 1, "ms-crafting-expansion-card-t3", items("assembling-machine-3", 50, "ms-material-crystal-charged", 50), items("ms-crafting-expansion-card-t3", 1)),
+
     recipe("crafting", 1, "ms-material-interface-a", items("iron-chest", 1, "ms-material-crystal-charged", 1, "electronic-circuit", 1), items("ms-material-interface-a", 1)),
     recipe("crafting", 1, "ms-material-interface-b", items("iron-chest", 1, "ms-material-crystal-charged", 1, "electronic-circuit", 1), items("ms-material-interface-b", 1)),
     recipe("crafting", 1, "ms-material-interface-c", items("iron-chest", 1, "ms-material-crystal-charged", 1, "electronic-circuit", 1), items("ms-material-interface-c", 1)),
