@@ -1,4 +1,7 @@
-Version 0.1.0 / 13-09-2023
+Version 0.1.1 / 14-09-2023
+- Removed on_load event to prevent game crash
+
+Version 0.1.0 / 14-09-2023
 - Added three tiers of Crafting Expansion Cards
 - Completely rewritten code
 

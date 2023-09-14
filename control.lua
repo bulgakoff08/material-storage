@@ -354,7 +354,6 @@ script.on_nth_tick(60, function()
 end)
 
 script.on_init(initStorage)
-script.on_load(initStorage)
 script.on_configuration_changed(initStorage)
 script.on_nth_tick(600, function()
     local player = game.get_player(1)
