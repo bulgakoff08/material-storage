@@ -1,3 +1,6 @@
+Version 0.1.2 / 16-09-2023
+- Fixed issue when interfaces and material chest inventory behaves incorrect if digital storage is full
+
 Version 0.1.1 / 14-09-2023
 - Removed on_load event to prevent game crash
 

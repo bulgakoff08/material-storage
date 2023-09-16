@@ -115,6 +115,12 @@ end
 
 local function getItem (inventory, itemId, amount)
     local intention = amount
+    local actualAmount = inventory.get_item_count(itemId)
+    if actualAmount >= intention then
+        return
+    else
+        intention = intention - actualAmount
+    end
     if not isAvailable(itemId, intention) then
         intention = getItemCount(itemId)
     end
