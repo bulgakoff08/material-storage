@@ -37,6 +37,24 @@ local function initStorage ()
     end
 end
 
+local function formatStorage (amount)
+    if amount >= 1048576 then
+        return string.format("%.2fMB", amount / 1048576)
+    elseif amount >= 10240 then
+        return string.format("%.2fKB", amount / 1024)
+    else
+        return tostring(amount) .. "B"
+    end
+end
+
+local function formatEnergy (amount)
+    if amount >= 1000 then
+        return string.format("%.2fK", amount / 1000)
+    else
+        return tostring(amount)
+    end
+end
+
 local function updateLabel (player)
     if player.gui.top.storage == nil then
         local label = player.gui.top.add({type = "label", name = "storage", caption = ""})
@@ -46,9 +64,8 @@ local function updateLabel (player)
         label.style.top_margin = 16
         label.style.bottom_margin = 16
     end
-    player.gui.top.storage.caption = "STORAGE: " .. global.antiCapacity .. " / " .. global.capacity ..
-            "\nENERGY: " .. global.energy ..
-            "\nCRAFT CAPACITY: " .. global.craftMultiplier
+    player.gui.top.storage.caption = "STORAGE: " .. formatStorage(global.antiCapacity) .. " / " .. formatStorage(global.capacity) ..
+            ", ENERGY: " .. formatEnergy(global.energy) .. ", x" .. global.craftMultiplier .. " CRAFT"
 end
 
 local function isStorable (itemId)
