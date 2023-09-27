@@ -4,6 +4,16 @@ local recipes = require("prototypes.crafting-templates")
 local refining = require("prototypes.refining")
 local utils = require("prototypes.commons")
 
+local SETTING_MATERIAL_CHEST_SIZE = "ms-material-chest-size"
+local SETTING_INTERFACE_CHEST_SIZE = "ms-interface-chest-size"
+local SETTING_CRYSTAL_ENERGY_VALUE = "ms-crystal-energy-value"
+local SETTING_SOLAR_PANEL_ENERGY_RATE = "ms-solar-panel-energy-rate"
+local SETTING_DIGITAL_STORAGE_BASE_VOLUME = "ms-digital-storage-base-volume"
+
+local function getSetting (settingId)
+    return settings.startup[settingId].value
+end
+
 local function cleanupStorage ()
     for itemId, amount in pairs(global.storage) do
         if game.item_prototypes[itemId] == nil and game.fluid_prototypes[itemId] then
@@ -15,7 +25,7 @@ end
 
 local function initStorage ()
     if global.capacity == nil then
-        global.capacity = 4096
+        global.capacity = getSetting(SETTING_DIGITAL_STORAGE_BASE_VOLUME)
     end
     if global.antiCapacity == nil then
         global.antiCapacity = 0
@@ -168,6 +178,9 @@ local function ejectDigitalStorage (inventory)
 end
 
 local function emptyInventory (inventory)
+    if inventory.get_item_count("ms-operation-cancelling-card") > 0 then
+        return
+    end
     if inventory.get_item_count("ms-ejection-card") == 0 then
         for itemId, amount in pairs(inventory.get_contents()) do
             if isStorable(itemId) then
@@ -182,6 +195,9 @@ local function emptyInventory (inventory)
 end
 
 local function refillInventory (inventory, plan)
+    if inventory.get_item_count("ms-operation-cancelling-card") > 0 then
+        return
+    end
     if inventory.get_item_count("ms-ejection-card") > 0 then
         ejectDigitalStorage(inventory)
     else
@@ -196,14 +212,14 @@ local function refillInventory (inventory, plan)
 end
 
 local function updateEnergy (inventory)
-    global.energy = global.energy + inventory.get_item_count("ms-material-chest-solar-panel")
+    global.energy = global.energy + (inventory.get_item_count("ms-material-chest-solar-panel") * getSetting(SETTING_SOLAR_PANEL_ENERGY_RATE))
     if global.energy > 10000 then
         global.energy = 10000
         return
     end
-    if global.energy <= 9000 then
+    if global.energy <= 10000 - getSetting(SETTING_CRYSTAL_ENERGY_VALUE) then
         if inventory.get_item_count("ms-material-crystal-charged") > 0 then
-            global.energy = global.energy + 1000
+            global.energy = global.energy + getSetting(SETTING_CRYSTAL_ENERGY_VALUE)
             inventory.remove({name = "ms-material-crystal-charged", count = 1})
         end
     end
@@ -310,6 +326,9 @@ local function refineFluid (recipe, amount)
 end
 
 local function craftItems (inventory, plan)
+    if inventory.get_item_count("ms-operation-cancelling-card") > 0 then
+        return
+    end
     for templateId, count in pairs(inventory.get_contents()) do
         if global.energy > 1 then
             if recipes[templateId] ~= nil then
@@ -377,13 +396,13 @@ script.on_nth_tick(60, function()
     local inventory = player.force.get_linked_inventory("ms-material-storage", 0)
     updateEnergy(inventory)
     emptyInventory(inventory)
-    local plan = createPlan(inventory, 150)
+    local plan = createPlan(inventory, getSetting(SETTING_MATERIAL_CHEST_SIZE))
     craftItems(inventory, plan)
     for _, interfaceId in pairs({"a", "b", "c", "d", "e", "f"}) do
         local interfaceInventory = player.force.get_linked_inventory(
                 "ms-material-interface-" .. interfaceId, 0)
         emptyInventory(interfaceInventory)
-        refillInventory(interfaceInventory, createPlan(interfaceInventory, 10))
+        refillInventory(interfaceInventory, createPlan(interfaceInventory, getSetting(SETTING_INTERFACE_CHEST_SIZE)))
     end
     refillInventory(inventory, plan)
     updateLabel(player)
@@ -397,7 +416,7 @@ script.on_configuration_changed(initStorage)
 script.on_nth_tick(600, function()
     local player = game.get_player(1)
     local inventory = player.force.get_linked_inventory("ms-material-storage", 0)
-    local capacity = 4096
+    local capacity = getSetting(SETTING_DIGITAL_STORAGE_BASE_VOLUME)
     for itemId, count in pairs(inventory.get_contents()) do
         if itemId == "ms-memory-module-t1" then
             capacity = capacity + (count * 4096)
@@ -471,7 +490,7 @@ script.on_event(defines.events.on_console_chat, function(event)
     if event.message == "!give" then
         local inventory = player.force.get_linked_inventory("ms-material-storage", 0)
         player.print("Items cheat applied")
-        for itemId, count in pairs(createPlan(inventory, 150)) do
+        for itemId, count in pairs(createPlan(inventory, getSetting(SETTING_MATERIAL_CHEST_SIZE))) do
             local required = count - getItemCount(itemId)
             if required > 0 then
                 modifyStorage(itemId, required)

@@ -1,3 +1,14 @@
+Version 0.2.0 / 27-09-2023
++ Added Ejection Card that allows to eject all items from digital storage
++ Added Operations Cancelling Card that pauses inventory interaction with digital storage
++ Introduced settings for:
+  - Material Chest Inventory Size
+  - Interface (Chanel A - F) Inventory Size
+  - Charged Material Crystal energy value
+  - Solar Panel production rate
+  - Digital Storage initial volume
++ Added formatting for status label (e.g. 15.1K instead 15105)
+
 Version 0.1.2 / 16-09-2023
 - Fixed issue when interfaces and material chest inventory behaves incorrect if digital storage is full
 
@@ -27,11 +38,11 @@ Version 0.0.6 / 09-09-2023
 - Added Chemical Templates for Lubricant and Sulfuric Acid
 
 Version 0.0.5 / 07-09-2023
-Fixed issue that optional dependency to "Simply Bees" was not really optional
+- Fixed issue that optional dependency to "Simply Bees" was not really optional
 
 Version 0.0.4 / 07-09-2023
-Added uncrafting card
-Added crafting templates for:
++ Added uncrafting card
++ Added crafting templates for:
 - Assemblers
 - Belts and Splitters
 - Power Pole
@@ -48,8 +59,8 @@ Version 0.0.2 / 03-09-2023
 - Fixed issue when craft waits for full stack of ingredient
 
 Version 0.0.1 / 03-09-2023
-Initial state:
-- Material Chest
-- Material Combinator
-- Fluids Digitization
-- Crafting, Smelting and Chemical templates for 5 science types production
++ Initial state:
+ - Material Chest
+ - Material Combinator
+ - Fluids Digitization
+ - Crafting, Smelting and Chemical templates for 5 science types production

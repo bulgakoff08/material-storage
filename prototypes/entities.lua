@@ -1,4 +1,6 @@
 local GRAPHICS_PATH = "__material-storage__/graphics/"
+local SETTING_MATERIAL_CHEST_SIZE = "ms-material-chest-size"
+local SETTING_INTERFACE_CHEST_SIZE = "ms-interface-chest-size"
 
 local function generateMaterialCombinator (prototype)
     prototype.sprites = make_4way_animation_from_spritesheet({
@@ -123,7 +125,7 @@ local function createMaterialInterface (identifier, linkId)
             }
         },
         link_id = linkId,
-        inventory_size = 10,
+        inventory_size = settings.startup[SETTING_INTERFACE_CHEST_SIZE].value,
         inventory_type = "with_filters_and_bar",
         gui_mode = "none",
         circuit_wire_connection_point = circuit_connector_definitions["chest"].points,
@@ -179,7 +181,7 @@ data:extend({
             }
         },
         link_id = 4910,
-        inventory_size = 150,
+        inventory_size = settings.startup[SETTING_MATERIAL_CHEST_SIZE].value,
         inventory_type = "with_filters_and_bar",
         gui_mode = "none",
         circuit_wire_connection_point = circuit_connector_definitions["chest"].points,

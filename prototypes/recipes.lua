@@ -40,6 +40,7 @@ data:extend({
     recipe("crafting", 1, "ms-memory-module-t1", items("ms-material-crystal-charged", 1, "electronic-circuit", 5, "copper-cable", 10), items("ms-memory-module-t1", 1)),
     recipe("crafting", 1, "ms-memory-module-t2", items("ms-memory-module-t1", 3, "ms-material-crystal-charged", 3, "advanced-circuit", 5), items("ms-memory-module-t2", 1)),
     recipe("crafting", 1, "ms-memory-module-t3", items("ms-memory-module-t2", 3, "ms-material-crystal-charged", 3, "processing-unit", 5), items("ms-memory-module-t3", 1)),
+    recipe("crafting", 1, "ms-operation-cancelling-card", items("ms-material-crystal-charged", 1), items("ms-operation-cancelling-card", 1)),
     recipe("crafting", 1, "ms-uncrafting-card", items("assembling-machine-3", 1, "ms-material-crystal-charged", 4, "processing-unit", 50), items("ms-uncrafting-card", 1)),
 
     recipe("crafting", 1, "ms-crafting-expansion-card-t1", items("assembling-machine-1", 50, "ms-material-crystal-charged", 50), items("ms-crafting-expansion-card-t1", 1)),
