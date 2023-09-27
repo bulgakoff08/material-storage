@@ -85,13 +85,15 @@ end
 
 local function createPlan (inventory, inventorySize)
     local result = {}
-    for index = 1, inventorySize do
-        local itemId = inventory.get_filter(index)
-        if itemId ~= nil then
-            if result[itemId] == nil then
-                result[itemId] = game.item_prototypes[itemId].stack_size
-            else
-                result[itemId] = result[itemId] + game.item_prototypes[itemId].stack_size
+    if inventory.is_filtered() then
+        for index = 1, inventorySize do
+            local itemId = inventory.get_filter(index)
+            if itemId ~= nil then
+                if result[itemId] == nil then
+                    result[itemId] = game.item_prototypes[itemId].stack_size
+                else
+                    result[itemId] = result[itemId] + game.item_prototypes[itemId].stack_size
+                end
             end
         end
     end
@@ -157,24 +159,38 @@ local function getBarrel (inventory, itemId, amount)
     end
 end
 
+local function ejectDigitalStorage (inventory)
+    for itemId, count in pairs(global.storage) do
+        if count > 0 and barrels[itemId] == nil then
+            modifyStorage(itemId, inventory.insert({name = itemId, count = count}) * -1)
+        end
+    end
+end
+
 local function emptyInventory (inventory)
-    for itemId, amount in pairs(inventory.get_contents()) do
-        if isStorable(itemId) then
-            if barrels[itemId] == nil then
-                putItem(inventory, itemId, amount)
-            elseif global.barreling then
-                putBarrel(inventory, itemId, amount)
+    if inventory.get_item_count("ms-ejection-card") == 0 then
+        for itemId, amount in pairs(inventory.get_contents()) do
+            if isStorable(itemId) then
+                if barrels[itemId] == nil then
+                    putItem(inventory, itemId, amount)
+                elseif global.barreling then
+                    putBarrel(inventory, itemId, amount)
+                end
             end
         end
     end
 end
 
 local function refillInventory (inventory, plan)
-    for itemId, amount in pairs(plan) do
-        if barrels[itemId] == nil then
-            getItem(inventory, itemId, amount)
-        elseif global.barreling then
-            getBarrel(inventory, itemId, amount)
+    if inventory.get_item_count("ms-ejection-card") > 0 then
+        ejectDigitalStorage(inventory)
+    else
+        for itemId, amount in pairs(plan) do
+            if barrels[itemId] == nil then
+                getItem(inventory, itemId, amount)
+            elseif global.barreling then
+                getBarrel(inventory, itemId, amount)
+            end
         end
     end
 end

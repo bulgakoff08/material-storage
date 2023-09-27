@@ -33,6 +33,7 @@ data:extend({
     recipe("advanced-crafting", 120, "ms-material-crystal-charged", items("ms-material-crystal", 1), items("ms-material-crystal-charged", 1)),
     recipe("advanced-crafting", 30, "ms-material-crystal", items("stone", 10), items("ms-material-crystal", 1)),
     recipe("crafting", 1, "ms-barreling-card", items("empty-barrel", 100, "assembling-machine-2", 1, "ms-material-crystal-charged", 1), items("ms-barreling-card", 1)),
+    recipe("crafting", 1, "ms-ejection-card", items("ms-material-crystal-charged", 1), items("ms-ejection-card", 1)),
     recipe("crafting", 1, "ms-material-chest-solar-panel", items("ms-material-crystal-charged", 5, "solar-panel", 10), items("ms-material-chest-solar-panel", 1)),
     recipe("crafting", 1, "ms-material-combinator", items("constant-combinator", 1, "ms-material-crystal-charged", 1), items("ms-material-combinator", 1)),
     recipe("crafting", 1, "ms-material-storage", items("iron-chest", 1, "ms-material-crystal-charged", 10, "ms-memory-module-t1", 3, "electronic-circuit", 25), items("ms-material-storage", 1)),

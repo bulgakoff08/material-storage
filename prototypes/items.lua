@@ -20,16 +20,18 @@ end
 data:extend({
     -- items 1st row
     item("ms-barreling-card", 1, "ms-items"),
+    item("ms-crafting-expansion-card-t1", 1, "ms-items"),
+    item("ms-crafting-expansion-card-t2", 1, "ms-items"),
+    item("ms-crafting-expansion-card-t3", 1, "ms-items"),
+    item("ms-ejection-card", 1, "ms-items"),
     item("ms-material-chest-solar-panel", 1, "ms-items"),
     item("ms-material-crystal", 50, "ms-items"),
     item("ms-material-crystal-charged", 50, "ms-items"),
     item("ms-memory-module-t1", 1, "ms-items"),
     item("ms-memory-module-t2", 1, "ms-items"),
     item("ms-memory-module-t3", 1, "ms-items"),
+    item("ms-operation-cancelling-card", 1, "ms-items"),
     item("ms-uncrafting-card", 1, "ms-items"),
-    item("ms-crafting-expansion-card-t1", 1, "ms-items"),
-    item("ms-crafting-expansion-card-t2", 1, "ms-items"),
-    item("ms-crafting-expansion-card-t3", 1, "ms-items"),
 
     -- machines
     machine("ms-material-combinator", 10, "ms-machines"),
