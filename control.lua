@@ -170,9 +170,16 @@ local function getBarrel (inventory, itemId, amount)
 end
 
 local function ejectDigitalStorage (inventory)
+    local keys = {}
     for itemId, count in pairs(global.storage) do
-        if count > 0 and barrels[itemId] == nil then
-            modifyStorage(itemId, inventory.insert({name = itemId, count = count}) * -1)
+        if count > 0 then
+            table.insert(keys, itemId)
+        end
+    end
+    table.sort(keys)
+    for _, itemId in pairs(keys) do
+        if barrels[itemId] == nil then
+            modifyStorage(itemId, inventory.insert({name = itemId, count = global.storage[itemId]}) * -1)
         end
     end
 end
