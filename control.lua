@@ -178,7 +178,7 @@ local function ejectDigitalStorage (inventory)
     end
     table.sort(keys)
     for _, itemId in pairs(keys) do
-        if barrels[itemId] == nil then
+        if utils.itemType(itemId) == "item" then
             modifyStorage(itemId, inventory.insert({name = itemId, count = global.storage[itemId]}) * -1)
         end
     end
