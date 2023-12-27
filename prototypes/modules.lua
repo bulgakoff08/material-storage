@@ -9,6 +9,7 @@ return {
     ["ms-memory-module-t1"] = 0,
     ["ms-memory-module-t2"] = 0,
     ["ms-memory-module-t3"] = 0,
+    ["ms-memory-subnet-card"] = 0,
     ["ms-operation-cancelling-card"] = 0,
     ["ms-uncrafting-card"] = 0,
     ["ms-void-card"] = 0

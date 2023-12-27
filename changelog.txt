@@ -1,3 +1,8 @@
+Version 0.3.0 / 27-12-2023
+- Added Subnet Storage Card to organize material subnetworks
+- Full Barrels can now be stored inside the Material Storage as usual items if no Barreling Card present
+    NOTE: is you got some full barrels stuck in a storage, try to remove Barreling Card, wait 10 seconds and request that barrels into inventory
+
 Version 0.2.1 / 02-10-2023
 - Items ejection goes in sorted order
 - Updated Brazilian translation
