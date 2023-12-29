@@ -30,6 +30,7 @@ data:extend({
     item("ms-memory-module-t1", 1, "ms-items"),
     item("ms-memory-module-t2", 1, "ms-items"),
     item("ms-memory-module-t3", 1, "ms-items"),
+    item("ms-memory-subnet-card", 1, "ms-items"),
     item("ms-operation-cancelling-card", 1, "ms-items"),
     item("ms-uncrafting-card", 1, "ms-items"),
 
