@@ -85,12 +85,13 @@ data:extend({
     item("ms-crafting-card-productivity-module", 1, "ms-modules"),
 
     -- fluids
-    item("ms-digital-heavy-oil", 4, "ms-fluids"),
-    item("ms-digital-light-oil", 4, "ms-fluids"),
-    item("ms-digital-lubricant", 4, "ms-fluids"),
-    item("ms-digital-petroleum-gas", 4, "ms-fluids"),
-    item("ms-digital-sulfuric-acid", 4, "ms-fluids"),
-    item("ms-digital-water", 4, "ms-fluids"),
+    item("ms-digital-crude-oil", 1000, "ms-fluids"),
+    item("ms-digital-heavy-oil", 1000, "ms-fluids"),
+    item("ms-digital-light-oil", 1000, "ms-fluids"),
+    item("ms-digital-lubricant", 1000, "ms-fluids"),
+    item("ms-digital-petroleum-gas", 1000, "ms-fluids"),
+    item("ms-digital-sulfuric-acid", 1000, "ms-fluids"),
+    item("ms-digital-water", 1000, "ms-fluids"),
 
     item("ms-chemical-card-advanced-oil-processing", 1, "ms-fluids"),
     item("ms-chemical-card-heavy-oil-cracking", 1, "ms-fluids"),
@@ -145,30 +146,3 @@ data:extend({
     -- item("", 1, "other"),
     -- item("", 1, "other"),
 })
-
-if mods["simply-bees"] then
-    data:extend({
-        item("ms-crafting-card-sb-coal-from-wax", 1, "ms-bees"),
-        item("ms-crafting-card-sb-copper-ore-from-wax", 1, "ms-bees"),
-        item("ms-crafting-card-sb-honey-cube", 1, "ms-bees"),
-        item("ms-crafting-card-sb-iron-ore-from-wax", 1, "ms-bees"),
-        item("ms-crafting-card-sb-solid-fuel-from-wax", 1, "ms-bees"),
-        item("ms-crafting-card-sb-stone-from-wax", 1, "ms-bees"),
-        item("ms-crafting-card-sb-uranium-ore-from-wax", 1, "ms-bees"),
-        item("ms-crafting-card-sb-wooden-frame", 1, "ms-bees"),
-        item("ms-crafting-card-sb-wooden-repaired-frame", 1, "ms-bees"),
-
-        item("ms-crafting-card-sb-coal-piece", 1, "ms-bees"),
-        item("ms-crafting-card-sb-copper-nugget", 1, "ms-bees"),
-        item("ms-crafting-card-sb-iron-nugget", 1, "ms-bees"),
-        item("ms-crafting-card-sb-stone-piece", 1, "ms-bees"),
-        item("ms-crafting-card-sb-uranium-nugget", 1, "ms-bees"),
-
-        -- OBSOLETE leave this only for prevent crash
-        item("ms-crafting-card-sb-coal-wax", 1, "ms-bees"),
-        item("ms-crafting-card-sb-copper-wax", 1, "ms-bees"),
-        item("ms-crafting-card-sb-iron-wax", 1, "ms-bees"),
-        item("ms-crafting-card-sb-stone-wax", 1, "ms-bees"),
-        item("ms-crafting-card-sb-uranium-wax", 1, "ms-bees"),
-    })
-end

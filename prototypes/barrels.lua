@@ -1,9 +1,9 @@
 return {
-    ["crude-oil-barrel"] = "crude-oil",
-    ["heavy-oil-barrel"] = "heavy-oil",
-    ["light-oil-barrel"] = "light-oil",
-    ["lubricant-barrel"] = "lubricant",
-    ["petroleum-gas-barrel"] = "petroleum-gas",
-    ["sulfuric-acid-barrel"] = "sulfuric-acid",
-    ["water-barrel"] = "water"
+    ["crude-oil-barrel"] = "ms-digital-crude-oil",
+    ["heavy-oil-barrel"] = "ms-digital-heavy-oil",
+    ["light-oil-barrel"] = "ms-digital-light-oil",
+    ["lubricant-barrel"] = "ms-digital-lubricant",
+    ["petroleum-gas-barrel"] = "ms-digital-petroleum-gas",
+    ["sulfuric-acid-barrel"] = "ms-digital-sulfuric-acid",
+    ["water-barrel"] = "ms-digital-water"
 }

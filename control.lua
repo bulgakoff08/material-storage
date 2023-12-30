@@ -15,11 +15,25 @@ local function getSetting (settingId)
     return settings.startup[settingId].value
 end
 
+local fluidMap = {
+    ["crude-oil"] = "ms-digital-crude-oil",
+    ["heavy-oil"] = "ms-digital-heavy-oil",
+    ["light-oil"] = "ms-digital-light-oil",
+    ["lubricant"] = "ms-digital-lubricant",
+    ["petroleum-gas"] = "ms-digital-petroleum-gas",
+    ["sulfuric-acid"] = "ms-digital-sulfuric-acid",
+    ["water"] = "ms-digital-water"
+}
+
 local function cleanupStorage ()
     for itemId, amount in pairs(global.storage) do
         if game.item_prototypes[itemId] == nil and game.fluid_prototypes[itemId] then
             global.storage[itemId] = nil
             global.antiCapacity = global.antiCapacity - amount
+        end
+        if fluidMap[itemId] then
+            global.storage[fluidMap[itemId]] = global.storage[itemId]
+            global.storage[itemId] = nil
         end
     end
 end
@@ -136,18 +150,6 @@ local function putItem (inventory, itemId, amount)
     end
 end
 
-local function putBarrel (inventory, itemId, amount)
-    for _ = 1, amount do
-        if global.capacity - global.antiCapacity > 51 then
-            modifyStorage(barrels[itemId], 50)
-            modifyStorage("empty-barrel", 1)
-            inventory.remove({name = itemId, count = 1})
-        else
-            return
-        end
-    end
-end
-
 local function getItem (inventory, itemId, amount)
     local intention = amount
     local actualAmount = inventory.get_item_count(itemId)
@@ -197,13 +199,7 @@ local function emptyInventory (inventory)
     if inventory.get_item_count("ms-ejection-card") == 0 then
         for itemId, amount in pairs(inventory.get_contents()) do
             if isStorable(itemId) then
-                if barrels[itemId] == nil then
-                    putItem(inventory, itemId, amount)
-                elseif global.barreling then
-                    putBarrel(inventory, itemId, amount)
-                else
-                    putItem(inventory, itemId, amount)
-                end
+                putItem(inventory, itemId, amount)
             end
         end
     end
@@ -309,8 +305,11 @@ local function uncraftItem (recipe, amount)
     global.energy = global.energy - 1 - storageUse * 4
 end
 
-local function refineFluid (recipe, amount)
+local function refineFluid (recipe, amount, plan)
     if amount == 0 then
+        return
+    end
+    if isAvailable(recipe.filter, plan[recipe.filter]) then
         return
     end
     local storageUse = 0
@@ -318,19 +317,19 @@ local function refineFluid (recipe, amount)
     for fluidId, count in pairs(recipe.input) do
         storageUse = storageUse + count * amount
         if not isAvailable(fluidId, count * amount) then
-            refineFluid(recipe, amount - 1)
+            refineFluid(recipe, amount - 1, plan)
             return
         end
     end
     for fluidId, count in pairs(recipe.output) do
         energyUse = energyUse + math.floor(count / 10)
         if getItemCount(fluidId) + count * amount > 2048 then
-            refineFluid(recipe, amount - 1)
+            refineFluid(recipe, amount - 1, plan)
             return
         end
     end
     if global.energy < energyUse then
-        refineFluid(recipe, amount - 1)
+        refineFluid(recipe, amount - 1, plan)
         return
     end
     for fluidId, count in pairs(recipe.input) do
@@ -366,7 +365,9 @@ local function craftItems (inventory, plan)
                     end
                 end
             elseif refining[templateId] ~= nil then
-                refineFluid(refining[templateId], count * global.craftMultiplier)
+                if plan[refining[templateId].filter] then
+                    refineFluid(refining[templateId], count * global.craftMultiplier, plan)
+                end
             end
         end
     end

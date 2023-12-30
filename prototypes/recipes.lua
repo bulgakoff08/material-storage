@@ -61,11 +61,20 @@ data:extend({
     recipe("crafting", 1, "ms-chemical-card-solid-fuel-2", items("solid-fuel", 100, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-solid-fuel-2", 1)),
     recipe("crafting", 1, "ms-chemical-card-solid-fuel-3", items("solid-fuel", 100, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-solid-fuel-3", 1)),
     recipe("crafting", 1, "ms-chemical-card-sulfur", items("sulfur", 50, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-sulfur", 1)),
-    recipe("crafting-with-fluid", 1, "ms-chemical-card-advanced-oil-processing", items("crude-oil", 1000, "oil-refinery", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-advanced-oil-processing", 1)),
-    recipe("crafting-with-fluid", 1, "ms-chemical-card-heavy-oil-cracking", items("heavy-oil", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-heavy-oil-cracking", 1)),
-    recipe("crafting-with-fluid", 1, "ms-chemical-card-light-oil-cracking", items("light-oil", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-light-oil-cracking", 1)),
-    recipe("crafting-with-fluid", 1, "ms-chemical-card-lubricant", items("lubricant", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-lubricant", 1)),
-    recipe("crafting-with-fluid", 1, "ms-chemical-card-sulfuric-acid", items("sulfuric-acid", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-sulfuric-acid", 1)),
+
+    recipe("crafting-with-fluid", 1, "ms-chemical-card-advanced-oil-processing", items("ms-digital-crude-oil", 1000, "oil-refinery", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-advanced-oil-processing", 1)),
+    recipe("crafting-with-fluid", 1, "ms-chemical-card-heavy-oil-cracking", items("ms-digital-heavy-oil", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-heavy-oil-cracking", 1)),
+    recipe("crafting-with-fluid", 1, "ms-chemical-card-light-oil-cracking", items("ms-digital-light-oil", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-light-oil-cracking", 1)),
+    recipe("crafting-with-fluid", 1, "ms-chemical-card-lubricant", items("ms-digital-lubricant", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-lubricant", 1)),
+    recipe("crafting-with-fluid", 1, "ms-chemical-card-sulfuric-acid", items("ms-digital-sulfuric-acid", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-sulfuric-acid", 1)),
+
+    recipe("crafting-with-fluid", 1, "ms-digital-crude-oil", items("crude-oil", 100), items("ms-digital-crude-oil", 100)),
+    recipe("crafting-with-fluid", 1, "ms-digital-heavy-oil", items("heavy-oil", 100), items("ms-digital-heavy-oil", 100)),
+    recipe("crafting-with-fluid", 1, "ms-digital-light-oil", items("light-oil", 100), items("ms-digital-light-oil", 100)),
+    recipe("crafting-with-fluid", 1, "ms-digital-lubricant", items("lubricant", 100), items("ms-digital-lubricant", 100)),
+    recipe("crafting-with-fluid", 1, "ms-digital-petroleum-gas", items("petroleum-gas", 100), items("ms-digital-petroleum-gas", 100)),
+    recipe("crafting-with-fluid", 1, "ms-digital-sulfuric-acid", items("sulfuric-acid", 100), items("ms-digital-sulfuric-acid", 100)),
+    recipe("crafting-with-fluid", 1, "ms-digital-water", items("water", 100), items("ms-digital-water", 100)),
 
     recipe("crafting", 1, "ms-crafting-card-advanced-circuit", items("advanced-circuit", 200, "assembling-machine-2", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-advanced-circuit", 1)),
     recipe("crafting", 1, "ms-crafting-card-assembling-machine-1", items("assembling-machine-1", 51, "ms-material-crystal-charged", 1), items("ms-crafting-card-assembling-machine-1", 1)),
@@ -132,23 +141,3 @@ data:extend({
     -- recipe("crafting", 1, "", {}, items("", 1)),
     -- recipe("crafting", 1, "", {}, items("", 1)),
 })
-
-if mods["simply-bees"] then
-    data:extend({
-        -- Bees
-        recipe("crafting", 1, "ms-crafting-card-sb-coal-from-wax", items("coal", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-coal-from-wax", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-coal-piece", items("sb-thermal-centrifuge", 1, "sb-coal-piece", 150), items("ms-crafting-card-sb-coal-piece", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-copper-nugget", items("sb-thermal-centrifuge", 1, "sb-copper-nugget", 150), items("ms-crafting-card-sb-copper-nugget", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-copper-ore-from-wax", items("copper-ore", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-copper-ore-from-wax", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-honey-cube", items("sb-honey-cube", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-honey-cube", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-iron-nugget", items("sb-thermal-centrifuge", 1, "sb-iron-nugget", 150), items("ms-crafting-card-sb-iron-nugget", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-iron-ore-from-wax", items("iron-ore", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-iron-ore-from-wax", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-solid-fuel-from-wax", items("solid-fuel", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-solid-fuel-from-wax", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-stone-from-wax", items("stone", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-stone-from-wax", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-stone-piece", items("sb-thermal-centrifuge", 1, "sb-stone-piece", 150), items("ms-crafting-card-sb-stone-piece", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-uranium-nugget", items("sb-thermal-centrifuge", 1, "sb-uranium-nugget", 150), items("ms-crafting-card-sb-uranium-nugget", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-uranium-ore-from-wax", items("uranium-ore", 50, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-uranium-ore-from-wax", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-wooden-frame", items("sb-wooden-frame", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-wooden-frame", 1)),
-        recipe("crafting", 1, "ms-crafting-card-sb-wooden-repaired-frame", items("sb-wooden-frame", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-sb-wooden-repaired-frame", 1)),
-    })
-end
