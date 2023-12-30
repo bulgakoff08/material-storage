@@ -321,12 +321,8 @@ local function refineFluid (recipe, amount, plan)
             return
         end
     end
-    for fluidId, count in pairs(recipe.output) do
+    for _, count in pairs(recipe.output) do
         energyUse = energyUse + math.floor(count / 10)
-        if getItemCount(fluidId) + count * amount > 2048 then
-            refineFluid(recipe, amount - 1, plan)
-            return
-        end
     end
     if global.energy < energyUse then
         refineFluid(recipe, amount - 1, plan)
