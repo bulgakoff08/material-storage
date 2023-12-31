@@ -19,7 +19,6 @@ end
 
 data:extend({
     -- items 1st row
-    item("ms-barreling-card", 1, "ms-items"),
     item("ms-crafting-expansion-card-t1", 1, "ms-items"),
     item("ms-crafting-expansion-card-t2", 1, "ms-items"),
     item("ms-crafting-expansion-card-t3", 1, "ms-items"),

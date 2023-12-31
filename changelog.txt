@@ -1,8 +1,10 @@
 Version 0.3.0 / 30-12-2023
-- Reintroduced Digital Fluids, now any fluid can be digitalized one-to-one ratio and used for crafting with templates
-- Barrelling card no longer unpacks fluids into Material Storage, use Digital Fluids instead
-    NOTE: migration system is added, all existing fluids inside the Digital Storage will be converted into Digital Fluids
-- Removed integration with "Simply Bees"
++ Reworked fluid system
+  - Reintroduced Digital Fluids, vanilla fluids can now be digitalized with one-to-one ratio and used for crafting with templates
+  - Digital fluids can be converted back into vanilla fluids
+  - Removed Barrelling Card item
+    NOTE: migration system was added. None of fluids will vanish, all fluids stored inside the Digital Storage will be converted into Digital Fluids instead
++ Removed integration with "Simply Bees"
 
 Version 0.3.0 / 27-12-2023
 - Added Subnet Storage Card to organize material subnetworks

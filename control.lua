@@ -1,4 +1,3 @@
-local barrels = require("prototypes.barrels")
 local modules = require("prototypes.modules")
 local recipes = require("prototypes.crafting-templates")
 local refining = require("prototypes.refining")
@@ -27,7 +26,7 @@ local fluidMap = {
 
 local function cleanupStorage ()
     for itemId, amount in pairs(global.storage) do
-        if game.item_prototypes[itemId] == nil and game.fluid_prototypes[itemId] then
+        if game.item_prototypes[itemId] == nil and game.fluid_prototypes[itemId] == nil then
             global.storage[itemId] = nil
             global.antiCapacity = global.antiCapacity - amount
         end
@@ -167,16 +166,6 @@ local function getItem (inventory, itemId, amount)
     end
 end
 
-local function getBarrel (inventory, itemId, amount)
-    for _ = 1, amount do
-        if isAvailable(barrels[itemId], 50) and isAvailable("empty-barrel", 1) then
-            modifyStorage(barrels[itemId], -50)
-            modifyStorage("empty-barrel", -1)
-            inventory.insert({name = itemId, count = 1})
-        end
-    end
-end
-
 local function ejectDigitalStorage (inventory)
     local keys = {}
     for itemId, count in pairs(global.storage) do
@@ -213,13 +202,7 @@ local function refillInventory (inventory, plan)
         ejectDigitalStorage(inventory)
     else
         for itemId, amount in pairs(plan) do
-            if barrels[itemId] == nil then
-                getItem(inventory, itemId, amount)
-            elseif global.barreling then
-                getBarrel(inventory, itemId, amount)
-            else
-                getItem(inventory, itemId, amount)
-            end
+            getItem(inventory, itemId, amount)
         end
     end
 end
@@ -525,7 +508,6 @@ script.on_nth_tick(600, function()
         end
     end
     global.craftMultiplier = craftMultiplier
-    global.barreling = inventory.get_item_count("ms-barreling-card") > 0
     global.uncrafting = inventory.get_item_count("ms-uncrafting-card") > 0
 end)
 

@@ -32,7 +32,6 @@ end
 data:extend({
     recipe("advanced-crafting", 120, "ms-material-crystal-charged", items("ms-material-crystal", 1), items("ms-material-crystal-charged", 1)),
     recipe("advanced-crafting", 30, "ms-material-crystal", items("stone", 10), items("ms-material-crystal", 1)),
-    recipe("crafting", 1, "ms-barreling-card", items("empty-barrel", 100, "assembling-machine-2", 1, "ms-material-crystal-charged", 1), items("ms-barreling-card", 1)),
     recipe("crafting", 1, "ms-ejection-card", items("ms-material-crystal-charged", 1), items("ms-ejection-card", 1)),
     recipe("crafting", 1, "ms-material-chest-solar-panel", items("ms-material-crystal-charged", 5, "solar-panel", 10), items("ms-material-chest-solar-panel", 1)),
     recipe("crafting", 1, "ms-material-combinator", items("constant-combinator", 1, "ms-material-crystal-charged", 1), items("ms-material-combinator", 1)),
@@ -68,6 +67,7 @@ data:extend({
     recipe("crafting-with-fluid", 1, "ms-chemical-card-lubricant", items("ms-digital-lubricant", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-lubricant", 1)),
     recipe("crafting-with-fluid", 1, "ms-chemical-card-sulfuric-acid", items("ms-digital-sulfuric-acid", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-sulfuric-acid", 1)),
 
+    -- digital fluids
     recipe("crafting-with-fluid", 1, "ms-digital-crude-oil", items("crude-oil", 100), items("ms-digital-crude-oil", 100)),
     recipe("crafting-with-fluid", 1, "ms-digital-heavy-oil", items("heavy-oil", 100), items("ms-digital-heavy-oil", 100)),
     recipe("crafting-with-fluid", 1, "ms-digital-light-oil", items("light-oil", 100), items("ms-digital-light-oil", 100)),
@@ -75,6 +75,15 @@ data:extend({
     recipe("crafting-with-fluid", 1, "ms-digital-petroleum-gas", items("petroleum-gas", 100), items("ms-digital-petroleum-gas", 100)),
     recipe("crafting-with-fluid", 1, "ms-digital-sulfuric-acid", items("sulfuric-acid", 100), items("ms-digital-sulfuric-acid", 100)),
     recipe("crafting-with-fluid", 1, "ms-digital-water", items("water", 100), items("ms-digital-water", 100)),
+
+    -- analog fluids
+    recipe("crafting-with-fluid", 1, "ms-crude-oil", items("ms-digital-crude-oil", 100), items("crude-oil", 100)),
+    recipe("crafting-with-fluid", 1, "ms-heavy-oil", items("ms-digital-heavy-oil", 100), items("heavy-oil", 100)),
+    recipe("crafting-with-fluid", 1, "ms-light-oil", items("ms-digital-light-oil", 100), items("light-oil", 100)),
+    recipe("crafting-with-fluid", 1, "ms-lubricant", items("ms-digital-lubricant", 100), items("lubricant", 100)),
+    recipe("crafting-with-fluid", 1, "ms-petroleum-gas", items("ms-digital-petroleum-gas", 100), items("petroleum-gas", 100)),
+    recipe("crafting-with-fluid", 1, "ms-sulfuric-acid", items("ms-digital-sulfuric-acid", 100), items("sulfuric-acid", 100)),
+    recipe("crafting-with-fluid", 1, "ms-water", items("ms-digital-water", 100), items("water", 100)),
 
     recipe("crafting", 1, "ms-crafting-card-advanced-circuit", items("advanced-circuit", 200, "assembling-machine-2", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-advanced-circuit", 1)),
     recipe("crafting", 1, "ms-crafting-card-assembling-machine-1", items("assembling-machine-1", 51, "ms-material-crystal-charged", 1), items("ms-crafting-card-assembling-machine-1", 1)),

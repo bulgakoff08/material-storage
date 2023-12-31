@@ -1,5 +1,4 @@
 return {
-    ["ms-barreling-card"] = 0,
     ["ms-crafting-expansion-card-t1"] = 0,
     ["ms-crafting-expansion-card-t2"] = 0,
     ["ms-crafting-expansion-card-t3"] = 0,
