@@ -33,6 +33,7 @@ data:extend({
     recipe("advanced-crafting", 120, "ms-material-crystal-charged", items("ms-material-crystal", 1), items("ms-material-crystal-charged", 1)),
     recipe("advanced-crafting", 30, "ms-material-crystal", items("stone", 10), items("ms-material-crystal", 1)),
     recipe("crafting", 1, "ms-ejection-card", items("ms-material-crystal-charged", 1), items("ms-ejection-card", 1)),
+    recipe("crafting", 1, "ms-infinity-water-card", items("pumpjack", 1, "ms-material-crystal-charged", 1), items("ms-infinity-water-card", 1)),
     recipe("crafting", 1, "ms-material-chest-solar-panel", items("ms-material-crystal-charged", 5, "solar-panel", 10), items("ms-material-chest-solar-panel", 1)),
     recipe("crafting", 1, "ms-material-combinator", items("constant-combinator", 1, "ms-material-crystal-charged", 1), items("ms-material-combinator", 1)),
     recipe("crafting", 1, "ms-material-storage", items("iron-chest", 1, "ms-material-crystal-charged", 10, "ms-memory-module-t1", 3, "electronic-circuit", 25), items("ms-material-storage", 1)),
@@ -61,11 +62,11 @@ data:extend({
     recipe("crafting", 1, "ms-chemical-card-solid-fuel-3", items("solid-fuel", 100, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-solid-fuel-3", 1)),
     recipe("crafting", 1, "ms-chemical-card-sulfur", items("sulfur", 50, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-sulfur", 1)),
 
-    recipe("crafting-with-fluid", 1, "ms-chemical-card-advanced-oil-processing", items("ms-digital-crude-oil", 1000, "oil-refinery", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-advanced-oil-processing", 1)),
-    recipe("crafting-with-fluid", 1, "ms-chemical-card-heavy-oil-cracking", items("ms-digital-heavy-oil", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-heavy-oil-cracking", 1)),
-    recipe("crafting-with-fluid", 1, "ms-chemical-card-light-oil-cracking", items("ms-digital-light-oil", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-light-oil-cracking", 1)),
-    recipe("crafting-with-fluid", 1, "ms-chemical-card-lubricant", items("ms-digital-lubricant", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-lubricant", 1)),
-    recipe("crafting-with-fluid", 1, "ms-chemical-card-sulfuric-acid", items("ms-digital-sulfuric-acid", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-sulfuric-acid", 1)),
+    recipe("crafting", 1, "ms-chemical-card-advanced-oil-processing", items("ms-digital-crude-oil", 1000, "oil-refinery", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-advanced-oil-processing", 1)),
+    recipe("crafting", 1, "ms-chemical-card-heavy-oil-cracking", items("ms-digital-heavy-oil", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-heavy-oil-cracking", 1)),
+    recipe("crafting", 1, "ms-chemical-card-light-oil-cracking", items("ms-digital-light-oil", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-light-oil-cracking", 1)),
+    recipe("crafting", 1, "ms-chemical-card-lubricant", items("ms-digital-lubricant", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-lubricant", 1)),
+    recipe("crafting", 1, "ms-chemical-card-sulfuric-acid", items("ms-digital-sulfuric-acid", 1000, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-sulfuric-acid", 1)),
 
     -- digital fluids
     recipe("crafting-with-fluid", 1, "ms-digital-crude-oil", items("crude-oil", 100), items("ms-digital-crude-oil", 100)),

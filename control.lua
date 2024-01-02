@@ -324,6 +324,14 @@ local function craftItems (inventory, plan)
     if inventory.get_item_count("ms-operation-cancelling-card") > 0 then
         return
     end
+    for _ = 1, inventory.get_item_count("ms-infinity-water-card") do
+        if global.energy >= 1 then
+            if not isAvailable("ms-digital-water", 100) then
+                modifyStorage("ms-digital-water", 10)
+                global.energy = global.energy - 1
+            end
+        end
+    end
     for templateId, count in pairs(inventory.get_contents()) do
         if global.energy > 1 then
             if recipes[templateId] ~= nil then

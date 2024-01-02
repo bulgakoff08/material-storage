@@ -4,6 +4,7 @@ Version 0.3.0 / 30-12-2023
   - Digital fluids can be converted back into vanilla fluids
   - Removed Barrelling Card item
     NOTE: migration system was added. None of fluids will vanish, all fluids stored inside the Digital Storage will be converted into Digital Fluids instead
++ Added Infinity Water Card
 + Removed integration with "Simply Bees"
 
 Version 0.3.0 / 27-12-2023

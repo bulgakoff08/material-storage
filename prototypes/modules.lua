@@ -3,6 +3,7 @@ return {
     ["ms-crafting-expansion-card-t2"] = 0,
     ["ms-crafting-expansion-card-t3"] = 0,
     ["ms-ejection-card"] = 0,
+    ["ms-infinity-water-card"] = 0,
     ["ms-material-chest-solar-panel"] = 0,
     ["ms-material-crystal-charged"] = 0,
     ["ms-memory-module-t1"] = 0,

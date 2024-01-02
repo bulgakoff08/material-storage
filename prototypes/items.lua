@@ -23,6 +23,7 @@ data:extend({
     item("ms-crafting-expansion-card-t2", 1, "ms-items"),
     item("ms-crafting-expansion-card-t3", 1, "ms-items"),
     item("ms-ejection-card", 1, "ms-items"),
+    item("ms-infinity-water-card", 1, "ms-items"),
     item("ms-material-chest-solar-panel", 1, "ms-items"),
     item("ms-material-crystal", 50, "ms-items"),
     item("ms-material-crystal-charged", 50, "ms-items"),
