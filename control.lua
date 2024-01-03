@@ -499,6 +499,9 @@ script.on_nth_tick(600, function()
         if itemId == "ms-memory-module-t3" then
             capacity = capacity + (count * 65536)
         end
+        if itemId == "ms-memory-subnet-card" then
+            capacity = capacity + (count * 65536)
+        end
     end
     global.capacity = capacity
     global.antiCapacity = countItems(global.storage)

@@ -4,6 +4,7 @@ Version 0.3.0 / 30-12-2023
   - Digital fluids can be converted back into vanilla fluids
   - Removed Barrelling Card item
     NOTE: migration system was added. None of fluids will vanish, all fluids stored inside the Digital Storage will be converted into Digital Fluids instead
++ Subnet Storage Card placed into main Material Chest counts as T3 memory card
 + Added Infinity Water Card
 + Removed integration with "Simply Bees"
 
