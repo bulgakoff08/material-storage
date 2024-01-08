@@ -1,10 +1,10 @@
-Version 0.3.0 / 30-12-2023
+Version 0.4.0 / 08-01-2024
 + Added Material Logistic Chest - it works like a Logistic Buffer Chest but has filtered slots to interact with Digital Storage and will place all incoming items into a Digital Storage like Material Interface does
 + Reworked fluid system
   - Reintroduced Digital Fluids, vanilla fluids can now be digitalized with one-to-one ratio and used for crafting with templates
   - Digital fluids can be converted back into vanilla fluids
   - Removed Barrelling Card item
-    NOTE: migration system was added. None of fluids will vanish, all fluids stored inside the Digital Storage will be converted into Digital Fluids instead
+    NOTE: migration system was added. None of fluids will vanish. All fluids stored inside the Digital Storage will be converted into Digital Fluids instead
 + Subnet Storage Card placed into main Material Chest counts as T3 memory card
 + Added Infinity Water Card
 + Removed integration with "Simply Bees"
