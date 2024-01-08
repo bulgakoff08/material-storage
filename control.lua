@@ -24,6 +24,13 @@ local fluidMap = {
     ["water"] = "ms-digital-water"
 }
 
+local function safeTable (reference)
+    if reference == nil then
+        return {}
+    end
+    return reference
+end
+
 local function cleanupStorage ()
     for itemId, amount in pairs(global.storage) do
         if game.item_prototypes[itemId] == nil and game.fluid_prototypes[itemId] == nil then
@@ -52,6 +59,9 @@ local function initStorage ()
     end
     if global.combinators == nil then
         global.combinators = {}
+    end
+    if global.chests == nil then
+        global.chests = {}
     end
     if global.craftMultiplier == nil then
         global.craftMultiplier = 1
@@ -213,7 +223,7 @@ local function updateEnergy (inventory)
         global.energy = 10000
         return
     end
-    if global.energy <= 10000 - getSetting(SETTING_CRYSTAL_ENERGY_VALUE) then
+    if global.energy <= 1000 - getSetting(SETTING_CRYSTAL_ENERGY_VALUE) then
         if inventory.get_item_count("ms-material-crystal-charged") > 0 then
             global.energy = global.energy + getSetting(SETTING_CRYSTAL_ENERGY_VALUE)
             inventory.remove({name = "ms-material-crystal-charged", count = 1})
@@ -396,6 +406,16 @@ local function updateCombinator (combinator)
     control.parameters = signals
 end
 
+local function updateLogisticChest (chest)
+    if chest and chest.valid then
+        local inventory = chest.get_inventory(defines.inventory.chest)
+        if inventory then
+            emptyInventory(inventory)
+            refillInventory(inventory, createPlan(inventory, 48))
+        end
+    end
+end
+
 local function emptySubnetInventory (inventory, storage)
     if inventory.get_item_count("ms-operation-cancelling-card") > 0 then
         return
@@ -468,9 +488,12 @@ script.on_nth_tick(60, function()
             refillSubnetInventory(interfaceInventory, global["storage-" .. interfaceId], createPlan(interfaceInventory, getSetting(SETTING_INTERFACE_CHEST_SIZE)))
         end
     end
+    for _, logisticChest in pairs(safeTable(global.chests)) do
+        updateLogisticChest(logisticChest)
+    end
     refillInventory(inventory, plan)
     updateLabel(player)
-    for _, combinator in pairs(global.combinators) do
+    for _, combinator in pairs(safeTable(global.combinators)) do
         updateCombinator(combinator)
     end
 end)
@@ -522,21 +545,44 @@ script.on_nth_tick(600, function()
     global.uncrafting = inventory.get_item_count("ms-uncrafting-card") > 0
 end)
 
-local function combinatorPlacementHandler (entity)
+local function entityPlacementHandler (entity)
     if entity and entity.valid and entity.name == "ms-material-combinator" then
+        if global.combinators == nil then
+            global.combinators = {}
+        end
         table.insert(global.combinators, entity)
+    end
+    if entity and entity.valid and entity.name == "ms-material-logistic-chest" then
+        if global.chests == nil then
+            global.chests = {}
+        end
+        table.insert(global.chests, entity)
     end
 end
 
-script.on_event(defines.events.on_built_entity, function(event) combinatorPlacementHandler(event.created_entity) end)
-script.on_event(defines.events.on_robot_built_entity, function(event) combinatorPlacementHandler(event.created_entity) end)
-script.on_event(defines.events.on_entity_cloned, function(event) combinatorPlacementHandler(event.destination) end)
+script.on_event(defines.events.on_built_entity, function(event) entityPlacementHandler(event.created_entity) end)
+script.on_event(defines.events.on_robot_built_entity, function(event) entityPlacementHandler(event.created_entity) end)
+script.on_event(defines.events.on_entity_cloned, function(event) entityPlacementHandler(event.destination) end)
 
-local function combinatorRemovalHandler (event)
+local function entityRemovalHandler (event)
     if event.entity and event.entity.valid and event.entity.name == "ms-material-combinator" then
+        if global.combinators == nil then
+            global.combinators = {}
+        end
         for counter = 1, #global.combinators do
             if global.combinators[counter] == event.entity then
                 table.remove(global.combinators, counter)
+                return
+            end
+        end
+    end
+    if event.entity and event.entity.valid and event.entity.name == "ms-material-logistic-chest" then
+        if global.chests == nil then
+            global.chests = {}
+        end
+        for counter = 1, #global.chests do
+            if global.chests[counter] == event.entity then
+                table.remove(global.chests, counter)
                 return
             end
         end
@@ -547,7 +593,7 @@ script.on_event({
     defines.events.on_entity_died,
     defines.events.on_player_mined_entity,
     defines.events.on_robot_mined_entity
-}, combinatorRemovalHandler)
+}, entityRemovalHandler)
 
 local function printStorage (player, storage, capacity, storageTitle)
     player.print("Contents of " .. storageTitle .. ":")

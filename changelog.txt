@@ -1,4 +1,5 @@
 Version 0.3.0 / 30-12-2023
++ Added Material Logistic Chest - it works like a Logistic Buffer Chest but has filtered slots to interact with Digital Storage and will place all incoming items into a Digital Storage like Material Interface does
 + Reworked fluid system
   - Reintroduced Digital Fluids, vanilla fluids can now be digitalized with one-to-one ratio and used for crafting with templates
   - Digital fluids can be converted back into vanilla fluids

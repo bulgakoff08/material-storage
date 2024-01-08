@@ -36,6 +36,7 @@ data:extend({
 
     -- machines
     machine("ms-material-combinator", 10, "ms-machines"),
+    machine("ms-material-logistic-chest", 10, "ms-machines"),
     machine("ms-material-storage", 10, "ms-machines"),
     machine("ms-material-interface-a", 10, "ms-machines"),
     machine("ms-material-interface-b", 10, "ms-machines"),

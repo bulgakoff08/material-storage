@@ -48,6 +48,8 @@ data:extend({
     recipe("crafting", 1, "ms-crafting-expansion-card-t2", items("assembling-machine-2", 50, "ms-material-crystal-charged", 50), items("ms-crafting-expansion-card-t2", 1)),
     recipe("crafting", 1, "ms-crafting-expansion-card-t3", items("assembling-machine-3", 50, "ms-material-crystal-charged", 50), items("ms-crafting-expansion-card-t3", 1)),
 
+    recipe("crafting", 1, "ms-material-logistic-chest", items("logistic-chest-buffer", 1, "ms-material-crystal-charged", 1), items("ms-material-logistic-chest", 1)),
+
     recipe("crafting", 1, "ms-material-interface-a", items("iron-chest", 1, "ms-material-crystal-charged", 1, "electronic-circuit", 1), items("ms-material-interface-a", 1)),
     recipe("crafting", 1, "ms-material-interface-b", items("iron-chest", 1, "ms-material-crystal-charged", 1, "electronic-circuit", 1), items("ms-material-interface-b", 1)),
     recipe("crafting", 1, "ms-material-interface-c", items("iron-chest", 1, "ms-material-crystal-charged", 1, "electronic-circuit", 1), items("ms-material-interface-c", 1)),
