@@ -218,9 +218,11 @@ local function refillInventory (inventory, plan)
 end
 
 local function updateEnergy (inventory)
+    local energyCap = 10000 + (inventory.get_item_count("ms-material-battery") * 500)
     global.energy = global.energy + (inventory.get_item_count("ms-material-chest-solar-panel") * getSetting(SETTING_SOLAR_PANEL_ENERGY_RATE))
-    if global.energy > 10000 then
-        global.energy = 10000
+
+    if global.energy > energyCap then
+        global.energy = energyCap
         return
     end
     if global.energy <= 1000 then

@@ -35,6 +35,7 @@ data:extend({
     recipe("crafting", 1, "ms-ejection-card", items("ms-material-crystal-charged", 1), items("ms-ejection-card", 1)),
     recipe("crafting", 1, "ms-infinity-water-card", items("pumpjack", 1, "ms-material-crystal-charged", 1), items("ms-infinity-water-card", 1)),
     recipe("crafting", 1, "ms-material-chest-solar-panel", items("ms-material-crystal-charged", 5, "solar-panel", 10), items("ms-material-chest-solar-panel", 1)),
+    recipe("crafting", 1, "ms-material-battery", items("ms-material-crystal-charged", 5, "battery-equipment", 1), items("ms-material-battery", 1)),
     recipe("crafting", 1, "ms-material-combinator", items("constant-combinator", 1, "ms-material-crystal-charged", 1), items("ms-material-combinator", 1)),
     recipe("crafting", 1, "ms-material-storage", items("iron-chest", 1, "ms-material-crystal-charged", 10, "ms-memory-module-t1", 3, "electronic-circuit", 25), items("ms-material-storage", 1)),
     recipe("crafting", 1, "ms-memory-module-t1", items("ms-material-crystal-charged", 1, "electronic-circuit", 5, "copper-cable", 10), items("ms-memory-module-t1", 1)),
