@@ -58,6 +58,7 @@ data:extend({
     recipe("crafting", 1, "ms-material-interface-f", items("iron-chest", 1, "ms-material-crystal-charged", 1, "electronic-circuit", 1), items("ms-material-interface-f", 1)),
 
     recipe("crafting", 1, "ms-chemical-card-battery", items("battery", 100, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-battery", 1)),
+    recipe("crafting", 1, "ms-chemical-card-explosives", items("explosives", 50, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-explosives", 1)),
     recipe("crafting", 1, "ms-chemical-card-plastic-bar", items("plastic-bar", 100, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-plastic-bar", 1)),
     recipe("crafting", 1, "ms-chemical-card-solid-fuel-1", items("solid-fuel", 100, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-solid-fuel-1", 1)),
     recipe("crafting", 1, "ms-chemical-card-solid-fuel-2", items("solid-fuel", 100, "chemical-plant", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-solid-fuel-2", 1)),
@@ -122,7 +123,7 @@ data:extend({
     recipe("crafting", 1, "ms-crafting-card-piercing-rounds-magazine", items("piercing-rounds-magazine", 200, "assembling-machine-2", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-piercing-rounds-magazine", 1)),
     recipe("crafting", 1, "ms-crafting-card-pipe", items("pipe", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-pipe", 1)),
     recipe("crafting", 1, "ms-crafting-card-pipe-to-ground", items("assembling-machine-1", 1, "pipe-to-ground", 50, "ms-material-crystal-charged", 1), items("ms-crafting-card-pipe-to-ground", 1)),
-    recipe("crafting", 1, "ms-crafting-card-processing-unit", items("processing-unit", 200, "assembling-machine-3", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-processing-unit", 1)),
+    recipe("crafting", 1, "ms-crafting-card-processing-unit", items("processing-unit", 100, "assembling-machine-3", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-processing-unit", 1)),
     recipe("crafting", 1, "ms-crafting-card-production-science-pack", items("production-science-pack", 200, "assembling-machine-3", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-production-science-pack", 1)),
     recipe("crafting", 1, "ms-crafting-card-productivity-module", items("productivity-module", 50, "assembling-machine-2", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-productivity-module", 1)),
     recipe("crafting", 1, "ms-crafting-card-rail", items("rail", 100, "assembling-machine-1", 1, "ms-material-crystal-charged", 1), items("ms-crafting-card-rail", 1)),

@@ -223,7 +223,7 @@ local function updateEnergy (inventory)
         global.energy = 10000
         return
     end
-    if global.energy <= 1000 - getSetting(SETTING_CRYSTAL_ENERGY_VALUE) then
+    if global.energy <= 1000 then
         if inventory.get_item_count("ms-material-crystal-charged") > 0 then
             global.energy = global.energy + getSetting(SETTING_CRYSTAL_ENERGY_VALUE)
             inventory.remove({name = "ms-material-crystal-charged", count = 1})
@@ -334,10 +334,10 @@ local function craftItems (inventory, plan)
     if inventory.get_item_count("ms-operation-cancelling-card") > 0 then
         return
     end
-    for _ = 1, inventory.get_item_count("ms-infinity-water-card") do
-        if global.energy >= 1 then
-            if not isAvailable("ms-digital-water", 100) then
-                modifyStorage("ms-digital-water", 10)
+    for _ = 1, inventory.get_item_count("ms-infinity-water-card") * global.craftMultiplier do
+        if global.energy >= 5 then
+            if not isAvailable("ms-digital-water", 1000) then
+                modifyStorage("ms-digital-water", 100)
                 global.energy = global.energy - 1
             end
         end
@@ -633,6 +633,50 @@ script.on_event(defines.events.on_console_chat, function(event)
     end
     if event.message == "!storage-F" then
         printStorage(player, global["storage-f"].items, 65536, "Subnet-F Storage")
+        return
+    end
+    if event.message == "!collect" then
+        local ownedEntities = {"ammo-turret", "accumulator", "arithmetic-combinator", "tile", "artillery-turret", "assembling-machine", "beacon", "boiler", "cargo-wagon", "constant-combinator", "container", "curved-rail", "decider-combinator", "electric-energy-interface", "electric-pole", "fluid-turret", "furnace", "gate", "generator", "heat-pipe", "inserter", "lab", "lamp", "electric-turret", "mining-drill", "offshore-pump", "pipe", "pipe-to-ground", "power-switch", "programmable-speaker", "pump", "radar", "rail-chain-signal", "solar-panel", "splitter", "storage-tank", "straight-rail", "transport-belt", "underground-belt", "wall"}
+        for _, entityId in pairs(ownedEntities) do
+            local entities = game.surfaces[1].find_entities_filtered({type = entityId})
+            for _, entity in pairs(entities) do
+                if game.item_prototypes[entity.name] ~= nil then
+                    if entity.name ~= "crash-site-generator-1" then
+                        modifyStorage(entity.name, 1)
+                        local inventory = entity.get_inventory(defines.inventory.chest)
+                        if inventory then
+                            for itemId, amount in pairs(inventory.get_contents()) do
+                                modifyStorage(itemId, amount)
+                            end
+                        end
+                        entity.destroy()
+                    end
+                else
+                    if entity.valid then
+                        local inventory = entity.get_inventory(defines.inventory.chest)
+                        if inventory then
+                            for itemId, amount in pairs(inventory.get_contents()) do
+                                modifyStorage(itemId, amount)
+                            end
+                            entity.destroy()
+                        else
+                            entity.force = game.forces[1]
+                            entity.order_deconstruction(entity.force)
+                        end
+                    end
+                end
+            end
+        end
+        local entities = game.surfaces[1].find_entities()
+        for _, entity in pairs(entities) do
+            if entity.type == "corpse" or entity.type == "rail-remnants" or entity.type == "land-mine" or entity.type == "ammo-turret" then
+                entity.destroy()
+            end
+        end
+        local tiles = game.surfaces[1].find_tiles_filtered({})
+        for _, tile in pairs(tiles) do
+            tile.order_deconstruction(game.forces[1])
+        end
         return
     end
     if event.message == "!give" then

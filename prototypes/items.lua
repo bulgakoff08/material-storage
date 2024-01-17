@@ -101,15 +101,16 @@ data:extend({
     item("ms-chemical-card-sulfuric-acid", 1, "ms-fluids"),
 
     -- plates
-    item("ms-smelting-card-copper-plate", 1, "ms-plates"),
-    item("ms-smelting-card-iron-plate", 1, "ms-plates"),
-    item("ms-smelting-card-steel-plate", 1, "ms-plates"),
+    item("ms-chemical-card-battery", 1, "ms-plates"),
+    item("ms-chemical-card-explosives", 1, "ms-plates"),
+    item("ms-chemical-card-plastic-bar", 1, "ms-plates"),
     item("ms-chemical-card-solid-fuel-1", 1, "ms-plates"),
     item("ms-chemical-card-solid-fuel-2", 1, "ms-plates"),
     item("ms-chemical-card-solid-fuel-3", 1, "ms-plates"),
-    item("ms-chemical-card-plastic-bar", 1, "ms-plates"),
     item("ms-chemical-card-sulfur", 1, "ms-plates"),
-    item("ms-chemical-card-battery", 1, "ms-plates"),
+    item("ms-smelting-card-copper-plate", 1, "ms-plates"),
+    item("ms-smelting-card-iron-plate", 1, "ms-plates"),
+    item("ms-smelting-card-steel-plate", 1, "ms-plates"),
 
     -- parts
     item("ms-crafting-card-copper-cable", 1, "ms-parts"),

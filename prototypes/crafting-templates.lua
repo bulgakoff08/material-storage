@@ -3,6 +3,7 @@ return {
     -- [""] = {result = "", amount = 1, input = {[""] = 1}},
 
     ["ms-chemical-card-battery"] = {result = "battery", amount = 1, input = {["copper-plate"] = 1, ["iron-plate"] = 1, ["ms-digital-sulfuric-acid"] = 20}},
+    ["ms-chemical-card-explosives"] = {result = "explosives", amount = 2, input = {["coal"] = 1, ["sulfur"] = 1, ["ms-digital-water"] = 10}},
     ["ms-chemical-card-plastic-bar"] = {result = "plastic-bar", amount = 1, input = {["coal"] = 1, ["ms-digital-petroleum-gas"] = 20}},
     ["ms-chemical-card-solid-fuel-1"] = {result = "solid-fuel", amount = 1, input = {["ms-digital-petroleum-gas"] = 20}},
     ["ms-chemical-card-solid-fuel-2"] = {result = "solid-fuel", amount = 1, input = {["ms-digital-light-oil"] = 10}},
