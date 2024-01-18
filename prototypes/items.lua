@@ -19,6 +19,11 @@ end
 
 data:extend({
     -- items 1st row
+    item("ms-blank-chemical-card", 50, "ms-items"),
+    item("ms-blank-crafting-card-t1", 50, "ms-items"),
+    item("ms-blank-crafting-card-t2", 50, "ms-items"),
+    item("ms-blank-crafting-card-t3", 50, "ms-items"),
+    item("ms-blank-smelting-card", 50, "ms-items"),
     item("ms-crafting-expansion-card-t1", 1, "ms-items"),
     item("ms-crafting-expansion-card-t2", 1, "ms-items"),
     item("ms-crafting-expansion-card-t3", 1, "ms-items"),
