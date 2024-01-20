@@ -17,7 +17,6 @@ Version 0.5.0 / ??-01-2024
 + Added Material Battery - buffer energy storage to handle crafting peaks
 + Reduced energy consumption to simply "energy = count of ingredients" for UPS optimizations
 + Minor code optimizations
-[PLAN] Added Crafting Templates Storage for organizing Crafting Templates
 [PLAN] Added Material Solar Array so store Material Solar Panels
 
 ==========================
