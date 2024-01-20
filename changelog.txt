@@ -1,99 +1,125 @@
+==========================
 Version 0.5.0 / ??-01-2024
+*** Big Play-test update, made many adjustments after actual game play-through ***
 + Buffed Infinity Water Card, now it produces 100 Digital Water per second and considers Crafting Multiplier
++ Material Logistic Chest can now process Crafting Templates
+    NOTE: materials in one chest are "invisible" for another chest.
+            Source ingredients must be either within the current chest or inside the Digital Storage
 + Remade Crafting/Smelting/Chemical Template recipes
     - Added blank templates as a base for every item template
     - Item Templates can be smelted to return Blank Crafting Template
-    - Each Template creation now require only one source item instead of whole stack
-+ Fixed Material Chest do not consume Charged Crystals to fulfill energy
+    - Each Template creation now requires only one source item instead of whole stack
++ Fixed Material Chest does not consume Charged Crystals to fulfill energy
++ Advanced Oil Processing card is now can be triggered with both Digital Petroleum Gas and Heavy Oil filters
+    NOTE: that meas you could set both Digital Petroleum Gas and Digital Heavy Oil filters into material chest
+            and it will process oil until both of them do not have enough count
 + Added Explosives Chemical Template
 + Added Material Battery - buffer energy storage to handle crafting peaks
++ Reduced energy consumption to simply "energy = count of ingredients" for UPS optimizations
++ Minor code optimizations
 [PLAN] Added Crafting Templates Storage for organizing Crafting Templates
 [PLAN] Added Material Solar Array so store Material Solar Panels
 
+==========================
 Version 0.4.0 / 08-01-2024
 + Added Material Logistic Chest - it works like a Logistic Buffer Chest but has filtered slots to interact with Digital Storage and will place all incoming items into a Digital Storage like Material Interface does
 + Reworked fluid system
-  - Reintroduced Digital Fluids, vanilla fluids can now be digitalized with one-to-one ratio and used for crafting with templates
-  - Digital fluids can be converted back into vanilla fluids
-  - Removed Barrelling Card item
-    NOTE: migration system was added. None of fluids will vanish. All fluids stored inside the Digital Storage will be converted into Digital Fluids instead
-+ Subnet Storage Card placed into main Material Chest counts as T3 memory card
+    - Reintroduced Digital Fluids, vanilla fluids can now be digitalized with one-to-one ratio and used for crafting with templates
+    - Digital fluids can be converted back into vanilla fluids
+    - Removed Barrelling Card item
+        NOTE: migration system was added. None of the fluids will vanish. All fluids stored inside the Digital Storage will be converted into Digital Fluids instead
++ Subnet Storage Card placed into the main Material Chest counts as T3 memory card
 + Added Infinity Water Card
 + Removed integration with "Simply Bees"
 
+==========================
 Version 0.3.0 / 27-12-2023
 - Added Subnet Storage Card to organize material subnetworks
 - Full Barrels can now be stored inside the Material Storage as usual items if no Barreling Card present
     NOTE: is you got some full barrels stuck in a storage, try to remove Barreling Card, wait 10 seconds and request that barrels into inventory
 
+==========================
 Version 0.2.1 / 02-10-2023
 - Items ejection goes in sorted order
 - Updated Brazilian translation
-- Fixed bug when script crashes on attempt to eject fluid
+- Fixed bug when a script crashes on an attempt to eject fluid
 
+==========================
 Version 0.2.0 / 27-09-2023
 + Added Ejection Card that allows to eject all items from digital storage
 + Added Operations Cancelling Card that pauses inventory interaction with digital storage
 + Introduced settings for:
-  - Material Chest Inventory Size
-  - Interface (Chanel A - F) Inventory Size
-  - Charged Material Crystal energy value
-  - Solar Panel production rate
-  - Digital Storage initial volume
+    - Material Chest Inventory Size
+    - Interface (Chanel A - F) Inventory Size
+    - Charged Material Crystal energy value
+    - Solar Panel production rate
+    - Digital Storage initial volume
 + Added formatting for status label (e.g. 15.1K instead 15105)
 
+==========================
 Version 0.1.2 / 16-09-2023
-- Fixed issue when interfaces and material chest inventory behaves incorrect if digital storage is full
+- Fixed issue when interfaces and material chest inventory behave incorrect if digital storage is full
 
+==========================
 Version 0.1.1 / 14-09-2023
-- Removed on_load event to prevent game crash
+- Removed on_load event to prevent a game crash
 
+==========================
 Version 0.1.0 / 14-09-2023
 - Added three tiers of Crafting Expansion Cards
 - Completely rewritten code
 
+==========================
 Version 0.0.9 / 12-09-2023
-- Fixed crash on load of save file where mod was not installed before
+- Fixed crash on a load of save file where mod was not installed before
 
+==========================
 Version 0.0.8 / 12-09-2023
 - Compatibility with new mechanics of mod "Simply Bees"
 - Fixed issue when game crashes if storage contains items from removed mod
 
+==========================
 Version 0.0.7 / 10-09-2023
 - Added Material Interfaces
 - Slightly optimized code
 - Fixed Crafting Templates from 0.0.4 did not have Changed Material Crystal in recipes
 
+==========================
 Version 0.0.6 / 09-09-2023
 - Updated Brazilian translation
 - Reworked fluids system, now you can barrel and un-barrel fluids with Barreling Card
 - Added Advanced Oil processing, Heavy Oil cracking and Light Oil cracking
 - Added Chemical Templates for Lubricant and Sulfuric Acid
 
+==========================
 Version 0.0.5 / 07-09-2023
 - Fixed issue that optional dependency to "Simply Bees" was not really optional
 
+==========================
 Version 0.0.4 / 07-09-2023
 + Added uncrafting card
 + Added crafting templates for:
-- Assemblers
-- Belts and Splitters
-- Power Pole
-- Inserters
-- Underground Pipe
-- Chests
-- Lamp
+    - Assemblers
+    - Belts and Splitters
+    - Power Pole
+    - Inserters
+    - Underground Pipe
+    - Chests
+    - Lamp
 
+==========================
 Version 0.0.3 / 04-09-2023
 - Added optional support for mod "Simply Bees"
 - Added Brazilian Translation (thanks to @LUISDASARTIMANHAS)
 
+==========================
 Version 0.0.2 / 03-09-2023
 - Fixed issue when craft waits for full stack of ingredient
 
+==========================
 Version 0.0.1 / 03-09-2023
 + Initial state:
- - Material Chest
- - Material Combinator
- - Fluids Digitization
- - Crafting, Smelting and Chemical templates for 5 science types production
+    - Material Chest
+    - Material Combinator
+    - Fluids Digitization
+    - Crafting, Smelting and Chemical templates for 5 science types productions

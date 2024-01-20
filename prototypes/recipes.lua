@@ -59,7 +59,7 @@ local templates = {
     ["ms-crafting-card-fast-inserter"] = {card = "ms-blank-crafting-card-t1", itemId = "fast-inserter"},
     ["ms-crafting-card-fast-splitter"] = {card = "ms-blank-crafting-card-t1", itemId = "fast-splitter"},
     ["ms-crafting-card-fast-transport-belt"] = {card = "ms-blank-crafting-card-t1", itemId = "fast-transport-belt"},
-    ["ms-crafting-card-fast-underground-belt"] = {card = "ms-blank-crafting-card-t1", itemId = "underground-belt"},
+    ["ms-crafting-card-fast-underground-belt"] = {card = "ms-blank-crafting-card-t1", itemId = "fast-underground-belt"},
     ["ms-crafting-card-filter-inserter"] = {card = "ms-blank-crafting-card-t1", itemId = "filter-inserter"},
     ["ms-crafting-card-firearm-magazine"] = {card = "ms-blank-crafting-card-t1", itemId = "firearm-magazine"},
     ["ms-crafting-card-inserter"] = {card = "ms-blank-crafting-card-t1", itemId = "inserter"},

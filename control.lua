@@ -210,7 +210,7 @@ local function refillInventory (inventory, plan)
 end
 
 local function updateEnergy (inventory)
-    local energyCap = 10000 + (inventory.get_item_count("ms-material-battery") * 500)
+    local energyCap = 10000 + (inventory.get_item_count("ms-material-battery") * 1000)
     global.energy = global.energy + (inventory.get_item_count("ms-material-chest-solar-panel") * getSetting(SETTING_SOLAR_PANEL_ENERGY_RATE))
 
     if global.energy > energyCap then
@@ -251,7 +251,7 @@ local function craftItem (recipe, amount)
         craftItem(recipe, amount - 1)
         return
     end
-    if global.energy < storageUse + 2 then
+    if global.energy < #recipe.input then
         craftItem(recipe, amount - 1)
         return
     end
@@ -263,10 +263,9 @@ local function craftItem (recipe, amount)
         local secondaryAmount = calculateAmount(recipe.secondaryAmount)
         if secondaryAmount > 0 then
             modifyStorage(recipe.secondaryResult, secondaryAmount)
-            global.energy = global.energy - secondaryAmount
         end
     end
-    global.energy = global.energy - storageUse - 1
+    global.energy = global.energy - #recipe.input
 end
 
 local function uncraftItem (recipe, amount)
@@ -289,29 +288,36 @@ local function uncraftItem (recipe, amount)
         modifyStorage(itemId, count * amount)
     end
     modifyStorage(recipe.result, recipe.amount * amount * -1)
-    global.energy = global.energy - 1 - storageUse * 4
+    global.energy = global.energy - (#recipe.input * 4)
 end
 
 local function refineFluid (recipe, amount, plan)
     if amount == 0 then
         return
     end
+    local conditions = 2
     if isAvailable(recipe.filter, plan[recipe.filter]) then
+        conditions = conditions - 1
+    end
+    if recipe.secondaryFilter == nil then
+        conditions = conditions - 1
+    elseif plan[recipe.secondaryFilter] then
+        if isAvailable(recipe.secondaryFilter, plan[recipe.secondaryFilter]) then
+            conditions = conditions - 1
+        end
+    else
+        conditions = conditions - 1
+    end
+    if conditions == 0 then
         return
     end
-    local storageUse = 0
-    local energyUse = 0
     for fluidId, count in pairs(recipe.input) do
-        storageUse = storageUse + count * amount
         if not isAvailable(fluidId, count * amount) then
             refineFluid(recipe, amount - 1, plan)
             return
         end
     end
-    for _, count in pairs(recipe.output) do
-        energyUse = energyUse + math.floor(count / 10)
-    end
-    if global.energy < energyUse then
+    if global.energy < recipe.energy then
         refineFluid(recipe, amount - 1, plan)
         return
     end
@@ -321,7 +327,7 @@ local function refineFluid (recipe, amount, plan)
     for fluidId, count in pairs(recipe.output) do
         modifyStorage(fluidId, count * amount)
     end
-    global.energy = global.energy - energyUse
+    global.energy = global.energy - recipe.energy
 end
 
 local function craftItems (inventory, plan)
@@ -356,7 +362,7 @@ local function craftItems (inventory, plan)
                     end
                 end
             elseif refining[templateId] ~= nil then
-                if plan[refining[templateId].filter] then
+                if plan[refining[templateId].filter] or plan[refining[templateId].secondaryFilter] then
                     refineFluid(refining[templateId], count * global.craftMultiplier, plan)
                 end
             end
@@ -405,7 +411,9 @@ local function updateLogisticChest (chest)
         local inventory = chest.get_inventory(defines.inventory.chest)
         if inventory then
             emptyInventory(inventory)
-            refillInventory(inventory, createPlan(inventory, 48))
+            local plan = createPlan(inventory, 48)
+            craftItems(inventory, plan)
+            refillInventory(inventory, plan)
         end
     end
 end
