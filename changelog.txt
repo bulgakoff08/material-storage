@@ -1,13 +1,13 @@
 ==========================
-Version 0.5.0 / ??-01-2024
-*** Big Play-test update, made many adjustments after actual game play-through ***
+Version 0.5.0 / 13-06-2024
+*** Play-test update, made many adjustments after actual game play-through ***
 + Buffed Infinity Water Card, now it produces 100 Digital Water per second and considers Crafting Multiplier
-+ Material Logistic Chest can now process Crafting Templates
-    NOTE: materials in one chest are "invisible" for another chest.
++ Material Logistic Chest can now use Crafting Templates
+    NOTE: one chest cannot "see" material in another chest.
             Source ingredients must be either within the current chest or inside the Digital Storage
-+ Remade Crafting/Smelting/Chemical Template recipes
++ Remade Crafting / Smelting / Chemical Template recipes for unification and re-usability
     - Added blank templates as a base for every item template
-    - Item Templates can be smelted to return Blank Crafting Template
+    - Item Templates can be smelted to return Blank Crafting Template back
     - Each Template creation now requires only one source item instead of whole stack
 + Fixed Material Chest does not consume Charged Crystals to fulfill energy
 + Advanced Oil Processing card is now can be triggered with both Digital Petroleum Gas and Heavy Oil filters
@@ -17,7 +17,6 @@ Version 0.5.0 / ??-01-2024
 + Added Material Battery - buffer energy storage to handle crafting peaks
 + Reduced energy consumption to simply "energy = count of ingredients" for UPS optimizations
 + Minor code optimizations
-[PLAN] Added Material Solar Array so store Material Solar Panels
 
 ==========================
 Version 0.4.0 / 08-01-2024
