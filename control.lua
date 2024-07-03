@@ -104,7 +104,7 @@ local function isStorable (itemId)
 end
 
 local function isAvailable (itemId, amount)
-    return global.storage[itemId] ~= nil and global.storage[itemId] >= amount
+    return global.storage[itemId] ~= nil and amount ~= nil and global.storage[itemId] >= amount
 end
 
 local function getItemCount (itemId)
