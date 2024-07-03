@@ -1,5 +1,5 @@
 ==========================
-Version 0.5.0 / 13-06-2024
+Version 0.5.0 / 03-07-2024
 *** Play-test update, made many adjustments after actual game play-through ***
 + Buffed Infinity Water Card, now it produces 100 Digital Water per second and considers Crafting Multiplier
 + Material Logistic Chest can now use Crafting Templates
