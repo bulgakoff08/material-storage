@@ -95,8 +95,9 @@ local function updateLabel (player)
         label.style.top_margin = 16
         label.style.bottom_margin = 16
     end
-    player.gui.top.storage.caption = "STORAGE: " .. formatStorage(global.antiCapacity) .. " / " .. formatStorage(global.capacity) ..
-            ", ENERGY: " .. formatEnergy(global.energy) .. ", x" .. global.craftMultiplier .. " CRAFT"
+    player.gui.top.storage.caption = string.format("STORAGE: %s / %s, ENERGY: %s, x%d CRAFT",
+            formatStorage(global.antiCapacity), formatStorage(global.capacity),
+            formatEnergy(global.energy), global.craftMultiplier)
 end
 
 local function isStorable (itemId)
@@ -268,27 +269,29 @@ local function craftItem (recipe, amount)
     global.energy = global.energy - #recipe.input
 end
 
-local function uncraftItem (recipe, amount)
+local function uncraftItem (recipe, amount, plan)
     if amount == 0 then
         return
     end
-    if recipe.amount * amount > getItemCount(recipe.result) then
-        uncraftItem(recipe, amount - 1)
-        return
+    if plan[recipe.result] then
+        if recipe.amount * amount > getItemCount(recipe.result) then
+            uncraftItem(recipe, amount - 1, plan)
+            return
+        end
+        local storageUse = 0
+        for _, count in pairs(recipe.input) do
+            storageUse = storageUse + count
+        end
+        if (storageUse * 4 - 1) > (global.capacity - global.antiCapacity) then
+            uncraftItem(recipe, amount - 1, plan)
+            return
+        end
+        for itemId, count in pairs(recipe.input) do
+            modifyStorage(itemId, count * amount)
+        end
+        modifyStorage(recipe.result, recipe.amount * amount * -1)
+        global.energy = global.energy - (#recipe.input * 4)
     end
-    local storageUse = 0
-    for _, count in pairs(recipe.input) do
-        storageUse = storageUse + count
-    end
-    if (storageUse * 4 - 1) > (global.capacity - global.antiCapacity) then
-        uncraftItem(recipe, amount - 1)
-        return
-    end
-    for itemId, count in pairs(recipe.input) do
-        modifyStorage(itemId, count * amount)
-    end
-    modifyStorage(recipe.result, recipe.amount * amount * -1)
-    global.energy = global.energy - (#recipe.input * 4)
 end
 
 local function refineFluid (recipe, amount, plan)
@@ -347,7 +350,7 @@ local function craftItems (inventory, plan)
             if recipes[templateId] ~= nil then
                 local recipe = recipes[templateId]
                 if global.uncrafting then
-                    uncraftItem(recipe, count * global.craftMultiplier)
+                    uncraftItem(recipe, count * global.craftMultiplier, plan)
                 else
                     if plan[recipe.result] ~= nil then
                         local request = plan[recipe.result] - getItemCount(recipe.result)
@@ -371,7 +374,6 @@ local function craftItems (inventory, plan)
 end
 
 local function updateCombinator (combinator)
-    local control = combinator.get_control_behavior()
     local signals = {}
     table.insert(signals, {
         count = global.capacity,
@@ -403,7 +405,7 @@ local function updateCombinator (combinator)
             index = index + 1
         end
     end
-    control.parameters = signals
+    combinator.get_control_behavior().parameters = signals
 end
 
 local function updateLogisticChest (chest)
