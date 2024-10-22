@@ -74,7 +74,7 @@ local templates = {
     ["ms-crafting-card-rail"] = {card = "ms-blank-crafting-card", itemId = "rail"},
     ["ms-crafting-card-small-lamp"] = {card = "ms-blank-crafting-card", itemId = "small-lamp"},
     ["ms-crafting-card-splitter"] = {card = "ms-blank-crafting-card", itemId = "splitter"},
-    ["ms-crafting-card-stack-inserter"] = {card = "ms-blank-crafting-card", itemId = "stack-inserter"},
+    --["ms-crafting-card-stack-inserter"] = {card = "ms-blank-crafting-card", itemId = "stack-inserter"},
     ["ms-crafting-card-stone-wall"] = {card = "ms-blank-crafting-card", itemId = "stone-wall"},
     ["ms-crafting-card-transport-belt"] = {card = "ms-blank-crafting-card", itemId = "transport-belt"},
     ["ms-crafting-card-underground-belt"] = {card = "ms-blank-crafting-card", itemId = "underground-belt"},

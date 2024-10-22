@@ -1,5 +1,9 @@
 ==========================
-Version 0.5.1 / 03-07-2024
+Version 0.5.2 / 23-10-2024
++ Removed crafting templates for items that migrated into SA DLC to prevent crash on base game
+
+==========================
+Version 0.5.1 / 22-10-2024
 + Updated Factorio version
     - NO QUALITY SUPPORT YET, DO NOT PUT QUALITY ITEMS INSIDE, IT WILL BE RESET TO DEFAULT QUALITY!
 

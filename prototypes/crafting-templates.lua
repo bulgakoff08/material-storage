@@ -53,7 +53,7 @@ return {
     ["ms-crafting-card-small-lamp"] = {result = "small-lamp", amount = 1, input = {["copper-cable"] = 3, ["electronic-circuit"] = 1, ["iron-plate"] = 1}},
     ["ms-crafting-card-speed-module"] = {result = "speed-module", amount = 1, input = {["electronic-circuit"] = 5, ["advanced-circuit"] = 5}},
     ["ms-crafting-card-splitter"] = {result = "splitter", amount = 1, input = {["electronic-circuit"] = 5, ["iron-plate"] = 5, ["transport-belt"] = 4}},
-    ["ms-crafting-card-stack-inserter"] = {result = "stack-inserter", amount = 1, input = {["advanced-circuit"] = 1, ["electronic-circuit"] = 15, ["fast-inserter"] = 1, ["iron-gear-wheel"] = 15}},
+    --["ms-crafting-card-stack-inserter"] = {result = "stack-inserter", amount = 1, input = {["advanced-circuit"] = 1, ["electronic-circuit"] = 15, ["fast-inserter"] = 1, ["iron-gear-wheel"] = 15}},
     ["ms-crafting-card-steel-chest"] = {result = "steel-chest", amount = 1, input = {["steel-plate"] = 8}},
     ["ms-crafting-card-stone-wall"] = {result = "stone-wall", amount = 1, input = {["stone-brick"] = 5}},
     ["ms-crafting-card-transport-belt"] = {result = "transport-belt", amount = 2, input = {["iron-gear-wheel"] = 1, ["iron-plate"] = 1}},
