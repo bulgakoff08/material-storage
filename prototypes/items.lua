@@ -62,7 +62,7 @@ data:extend({
 
     -- inserters
     item("ms-crafting-card-fast-inserter", 1, "ms-inserters"),
-    item("ms-crafting-card-filter-inserter", 1, "ms-inserters"),
+    --item("ms-crafting-card-filter-inserter", 1, "ms-inserters"),
     item("ms-crafting-card-inserter", 1, "ms-inserters"),
     item("ms-crafting-card-long-handed-inserter", 1, "ms-inserters"),
     item("ms-crafting-card-stack-inserter", 1, "ms-inserters"),
@@ -126,7 +126,7 @@ data:extend({
     item("ms-crafting-card-engine-unit", 1, "ms-parts"),
     item("ms-crafting-card-electric-engine-unit", 1, "ms-parts"),
     item("ms-crafting-card-flying-robot-frame", 1, "ms-parts"),
-    item("ms-crafting-card-rocket-control-unit", 1, "ms-parts"),
+    --item("ms-crafting-card-rocket-control-unit", 1, "ms-parts"),
     item("ms-crafting-card-low-density-structure", 1, "ms-parts"),
     item("ms-crafting-card-rocket-fuel", 1, "ms-parts"),
 

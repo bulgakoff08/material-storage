@@ -60,7 +60,7 @@ local templates = {
     ["ms-crafting-card-fast-splitter"] = {card = "ms-blank-crafting-card", itemId = "fast-splitter"},
     ["ms-crafting-card-fast-transport-belt"] = {card = "ms-blank-crafting-card", itemId = "fast-transport-belt"},
     ["ms-crafting-card-fast-underground-belt"] = {card = "ms-blank-crafting-card", itemId = "fast-underground-belt"},
-    ["ms-crafting-card-filter-inserter"] = {card = "ms-blank-crafting-card", itemId = "filter-inserter"},
+    --["ms-crafting-card-filter-inserter"] = {card = "ms-blank-crafting-card", itemId = "filter-inserter"},
     ["ms-crafting-card-firearm-magazine"] = {card = "ms-blank-crafting-card", itemId = "firearm-magazine"},
     ["ms-crafting-card-inserter"] = {card = "ms-blank-crafting-card", itemId = "inserter"},
     ["ms-crafting-card-iron-chest"] = {card = "ms-blank-crafting-card", itemId = "iron-chest"},
@@ -99,7 +99,7 @@ local templates = {
     ["ms-crafting-card-low-density-structure"] = {card = "ms-blank-crafting-card", itemId = "low-density-structure"},
     ["ms-crafting-card-processing-unit"] = {card = "ms-blank-crafting-card", itemId = "processing-unit"},
     ["ms-crafting-card-production-science-pack"] = {card = "ms-blank-crafting-card", itemId = "production-science-pack"},
-    ["ms-crafting-card-rocket-control-unit"] = {card = "ms-blank-crafting-card", itemId = "rocket-control-unit"},
+    --["ms-crafting-card-rocket-control-unit"] = {card = "ms-blank-crafting-card", itemId = "rocket-control-unit"},
     ["ms-crafting-card-rocket-fuel"] = {card = "ms-blank-crafting-card", itemId = "rocket-fuel"},
     ["ms-crafting-card-utility-science-pack"] = {card = "ms-blank-crafting-card", itemId = "utility-science-pack"},
 
@@ -156,7 +156,7 @@ data:extend({
     recipe("crafting", 1, "ms-crafting-expansion-card-t2", items("assembling-machine-2", 50, "ms-material-crystal-charged", 50), items("ms-crafting-expansion-card-t2", 1)),
     recipe("crafting", 1, "ms-crafting-expansion-card-t3", items("assembling-machine-3", 50, "ms-material-crystal-charged", 50), items("ms-crafting-expansion-card-t3", 1)),
 
-    recipe("crafting", 1, "ms-material-logistic-chest", items("logistic-chest-buffer", 1, "ms-material-crystal-charged", 1), items("ms-material-logistic-chest", 1)),
+    recipe("crafting", 1, "ms-material-logistic-chest", items("buffer-chest", 1, "ms-material-crystal-charged", 1), items("ms-material-logistic-chest", 1)),
 
     recipe("crafting", 1, "ms-chemical-card-advanced-oil-processing", items("ms-digital-crude-oil", 1000, "oil-refinery", 1, "ms-material-crystal-charged", 1), items("ms-chemical-card-advanced-oil-processing", 1)),
     recipe("crafting", 1, "ms-chemical-card-heavy-oil-cracking", items("ms-digital-heavy-oil", 1000, "ms-blank-chemical-card", 1), items("ms-chemical-card-heavy-oil-cracking", 1)),

@@ -1,4 +1,9 @@
 ==========================
+Version 0.5.1 / 03-07-2024
++ Updated Factorio version
+    - NO QUALITY SUPPORT YET, DO NOT PUT QUALITY ITEMS INSIDE, IT WILL BE RESET TO DEFAULT QUALITY!
+
+==========================
 Version 0.5.0 / 03-07-2024
 *** Play-test update, made many adjustments after actual game play-through ***
 + Buffed Infinity Water Card, now it produces 100 Digital Water per second and considers Crafting Multiplier

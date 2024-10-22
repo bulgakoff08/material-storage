@@ -27,7 +27,7 @@ local function generateMaterialCombinator (prototype)
     prototype.activity_led_sprites = {
         north = util.draw_as_glow({
             scale = 0.5,
-            filename = "__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-N.png",
+            filename = "__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-N.png",
             width = 14,
             height = 12,
             frame_count = 1,
@@ -35,7 +35,7 @@ local function generateMaterialCombinator (prototype)
         }),
         east = util.draw_as_glow({
             scale = 0.5,
-            filename = "__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-E.png",
+            filename = "__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-E.png",
             width = 14,
             height = 14,
             frame_count = 1,
@@ -43,7 +43,7 @@ local function generateMaterialCombinator (prototype)
         }),
         south = util.draw_as_glow({
             scale = 0.5,
-            filename = "__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-S.png",
+            filename = "__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-S.png",
             width = 14,
             height = 16,
             frame_count = 1,
@@ -51,7 +51,7 @@ local function generateMaterialCombinator (prototype)
         }),
         west = util.draw_as_glow({
             scale = 0.5,
-            filename = "__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-W.png",
+            filename = "__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-W.png",
             width = 14,
             height = 16,
             frame_count = 1,
@@ -128,8 +128,7 @@ local function createMaterialInterface (identifier, linkId)
         inventory_size = settings.startup[SETTING_INTERFACE_CHEST_SIZE].value,
         inventory_type = "with_filters_and_bar",
         gui_mode = "none",
-        circuit_wire_connection_point = circuit_connector_definitions["chest"].points,
-        circuit_connector_sprites = circuit_connector_definitions["chest"].sprites,
+        circuit_connector = circuit_connector_definitions["chest"],
         circuit_wire_max_distance = default_circuit_wire_max_distance,
         open_sound = {filename = "__base__/sound/machine-open.ogg", volume = 0.85},
         close_sound = {filename = "__base__/sound/machine-close.ogg", volume = 0.75}
@@ -272,8 +271,7 @@ data:extend({
                 }
             }
         },
-        circuit_wire_connection_point = circuit_connector_definitions["chest"].points,
-        circuit_connector_sprites = circuit_connector_definitions["chest"].sprites,
+        circuit_connector = circuit_connector_definitions["chest"],
         circuit_wire_max_distance = default_circuit_wire_max_distance
     }
 })

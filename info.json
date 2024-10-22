@@ -1,8 +1,8 @@
 {
 	"name": "material-storage",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"title": "Material Storage",
 	"author": "mad_engineer",
-	"factorio_version": "1.1",
-	"description": "Please submit a topic in discussions if this mod behaved weird, this will help much! Factorio mod inspired by Applied Energistics 2 from Minecraft. Store items, smelt plates, craft and uncraft goods, refine oil - all this inside a single chest inventory"
+	"factorio_version": "2.0",
+	"description": "DOES NOT SUPPORT QUALITY! Please submit a topic in discussions if this mod behaved weird, this will help much! Factorio mod inspired by Applied Energistics 2 from Minecraft. Store items, smelt plates, craft and uncraft goods, refine oil - all this inside a single chest inventory"
 }

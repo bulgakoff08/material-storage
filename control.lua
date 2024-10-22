@@ -24,46 +24,46 @@ local function safeTable (reference)
 end
 
 local function cleanupStorage ()
-    for itemId, amount in pairs(global.storage) do
-        if game.item_prototypes[itemId] == nil and game.fluid_prototypes[itemId] == nil then
-            global.storage[itemId] = nil
-            global.antiCapacity = global.antiCapacity - amount
+    for itemId, amount in pairs(storage.storage) do
+        if prototypes.item[itemId] == nil and prototypes.fluid[itemId] == nil then
+            storage.storage[itemId] = nil
+            storage.antiCapacity = storage.antiCapacity - amount
         end
         if fluidMap[itemId] then
-            global.storage[fluidMap[itemId]] = global.storage[itemId]
-            global.storage[itemId] = nil
+            storage.storage[fluidMap[itemId]] = storage.storage[itemId]
+            storage.storage[itemId] = nil
         end
     end
 end
 
 local function initStorage ()
-    if global.capacity == nil then
-        global.capacity = getSetting(SETTING_DIGITAL_STORAGE_BASE_VOLUME)
+    if storage.capacity == nil then
+        storage.capacity = getSetting(SETTING_DIGITAL_STORAGE_BASE_VOLUME)
     end
-    if global.antiCapacity == nil then
-        global.antiCapacity = 0
+    if storage.antiCapacity == nil then
+        storage.antiCapacity = 0
     end
-    if global.energy == nil then
-        global.energy = 10000
+    if storage.energy == nil then
+        storage.energy = 10000
     end
-    if global.storage == nil then
-        global.storage = {}
+    if storage.storage == nil then
+        storage.storage = {}
     end
-    if global.combinators == nil then
-        global.combinators = {}
+    if storage.combinators == nil then
+        storage.combinators = {}
     end
-    if global.chests == nil then
-        global.chests = {}
+    if storage.chests == nil then
+        storage.chests = {}
     end
-    if global.craftMultiplier == nil then
-        global.craftMultiplier = 1
+    if storage.craftMultiplier == nil then
+        storage.craftMultiplier = 1
     end
     if game ~= nil then
         cleanupStorage()
     end
     for _, interfaceId in pairs(interfaces) do
-        if global["storage-" .. interfaceId] == nil then
-            global["storage-" .. interfaceId] = {antiCapacity = 0, items = {}}
+        if storage["storage-" .. interfaceId] == nil then
+            storage["storage-" .. interfaceId] = {antiCapacity = 0, items = {}}
         end
     end
 end
@@ -96,8 +96,8 @@ local function updateLabel (player)
         label.style.bottom_margin = 16
     end
     player.gui.top.storage.caption = string.format("STORAGE: %s / %s, ENERGY: %s, x%d CRAFT",
-            formatStorage(global.antiCapacity), formatStorage(global.capacity),
-            formatEnergy(global.energy), global.craftMultiplier)
+            formatStorage(storage.antiCapacity), formatStorage(storage.capacity),
+            formatEnergy(storage.energy), storage.craftMultiplier)
 end
 
 local function isStorable (itemId)
@@ -105,26 +105,27 @@ local function isStorable (itemId)
 end
 
 local function isAvailable (itemId, amount)
-    return global.storage[itemId] ~= nil and amount ~= nil and global.storage[itemId] >= amount
+    return storage.storage[itemId] ~= nil and amount ~= nil and storage.storage[itemId] >= amount
 end
 
 local function getItemCount (itemId)
-    if global.storage[itemId] == nil then
-        global.storage[itemId] = 0
+    if storage.storage[itemId] == nil then
+        storage.storage[itemId] = 0
     end
-    return global.storage[itemId]
+    return storage.storage[itemId]
 end
 
 local function createPlan (inventory, inventorySize)
     local result = {}
     if inventory.is_filtered() then
         for index = 1, inventorySize do
-            local itemId = inventory.get_filter(index)
-            if itemId ~= nil then
+            local filter = inventory.get_filter(index)
+            if filter ~= nil then
+                local itemId = filter.name
                 if result[itemId] == nil then
-                    result[itemId] = game.item_prototypes[itemId].stack_size
+                    result[itemId] = prototypes.item[itemId].stack_size
                 else
-                    result[itemId] = result[itemId] + game.item_prototypes[itemId].stack_size
+                    result[itemId] = result[itemId] + prototypes.item[itemId].stack_size
                 end
             end
         end
@@ -133,15 +134,15 @@ local function createPlan (inventory, inventorySize)
 end
 
 local function modifyStorage (itemId, amount)
-    if (global.storage[itemId] == nil) then
-        global.storage[itemId] = 0
+    if (storage.storage[itemId] == nil) then
+        storage.storage[itemId] = 0
     end
-    global.storage[itemId] = global.storage[itemId] + amount
-    global.antiCapacity = global.antiCapacity + amount
+    storage.storage[itemId] = storage.storage[itemId] + amount
+    storage.antiCapacity = storage.antiCapacity + amount
 end
 
 local function putItem (inventory, itemId, amount)
-    local freeSpace = global.capacity - global.antiCapacity
+    local freeSpace = storage.capacity - storage.antiCapacity
     if freeSpace > 0 then
         local intention = amount
         if freeSpace < intention then
@@ -171,7 +172,7 @@ end
 
 local function ejectDigitalStorage (inventory)
     local keys = {}
-    for itemId, count in pairs(global.storage) do
+    for itemId, count in pairs(storage.storage) do
         if count > 0 then
             table.insert(keys, itemId)
         end
@@ -179,7 +180,7 @@ local function ejectDigitalStorage (inventory)
     table.sort(keys)
     for _, itemId in pairs(keys) do
         if utils.itemType(itemId) == "item" then
-            modifyStorage(itemId, inventory.insert({name = itemId, count = global.storage[itemId]}) * -1)
+            modifyStorage(itemId, inventory.insert({name = itemId, count = storage.storage[itemId]}) * -1)
         end
     end
 end
@@ -189,9 +190,9 @@ local function emptyInventory (inventory)
         return
     end
     if inventory.get_item_count("ms-ejection-card") == 0 then
-        for itemId, amount in pairs(inventory.get_contents()) do
-            if isStorable(itemId) then
-                putItem(inventory, itemId, amount)
+        for _, wrapper in pairs(inventory.get_contents()) do
+            if isStorable(wrapper.name) then
+                putItem(inventory, wrapper.name, wrapper.count)
             end
         end
     end
@@ -212,15 +213,15 @@ end
 
 local function updateEnergy (inventory)
     local energyCap = 10000 + (inventory.get_item_count("ms-material-battery") * 1000)
-    global.energy = global.energy + (inventory.get_item_count("ms-material-chest-solar-panel") * getSetting(SETTING_SOLAR_PANEL_ENERGY_RATE))
+    storage.energy = storage.energy + (inventory.get_item_count("ms-material-chest-solar-panel") * getSetting(SETTING_SOLAR_PANEL_ENERGY_RATE))
 
-    if global.energy > energyCap then
-        global.energy = energyCap
+    if storage.energy > energyCap then
+        storage.energy = energyCap
         return
     end
-    if global.energy <= 1000 then
+    if storage.energy <= 1000 then
         if inventory.get_item_count("ms-material-crystal-charged") > 0 then
-            global.energy = global.energy + getSetting(SETTING_CRYSTAL_ENERGY_VALUE)
+            storage.energy = storage.energy + getSetting(SETTING_CRYSTAL_ENERGY_VALUE)
             inventory.remove({name = "ms-material-crystal-charged", count = 1})
         end
     end
@@ -248,11 +249,11 @@ local function craftItem (recipe, amount)
             return
         end
     end
-    if (global.capacity - global.antiCapacity) < (recipe.amount * amount - storageUse) then
+    if (storage.capacity - storage.antiCapacity) < (recipe.amount * amount - storageUse) then
         craftItem(recipe, amount - 1)
         return
     end
-    if global.energy < #recipe.input then
+    if storage.energy < #recipe.input then
         craftItem(recipe, amount - 1)
         return
     end
@@ -266,7 +267,7 @@ local function craftItem (recipe, amount)
             modifyStorage(recipe.secondaryResult, secondaryAmount)
         end
     end
-    global.energy = global.energy - #recipe.input
+    storage.energy = storage.energy - #recipe.input
 end
 
 local function uncraftItem (recipe, amount, plan)
@@ -282,7 +283,7 @@ local function uncraftItem (recipe, amount, plan)
         for _, count in pairs(recipe.input) do
             storageUse = storageUse + count
         end
-        if (storageUse * 4 - 1) > (global.capacity - global.antiCapacity) then
+        if (storageUse * 4 - 1) > (storage.capacity - storage.antiCapacity) then
             uncraftItem(recipe, amount - 1, plan)
             return
         end
@@ -290,7 +291,7 @@ local function uncraftItem (recipe, amount, plan)
             modifyStorage(itemId, count * amount)
         end
         modifyStorage(recipe.result, recipe.amount * amount * -1)
-        global.energy = global.energy - (#recipe.input * 4)
+        storage.energy = storage.energy - (#recipe.input * 4)
     end
 end
 
@@ -320,7 +321,7 @@ local function refineFluid (recipe, amount, plan)
             return
         end
     end
-    if global.energy < recipe.energy then
+    if storage.energy < recipe.energy then
         refineFluid(recipe, amount - 1, plan)
         return
     end
@@ -330,82 +331,69 @@ local function refineFluid (recipe, amount, plan)
     for fluidId, count in pairs(recipe.output) do
         modifyStorage(fluidId, count * amount)
     end
-    global.energy = global.energy - recipe.energy
+    storage.energy = storage.energy - recipe.energy
 end
 
 local function craftItems (inventory, plan)
     if inventory.get_item_count("ms-operation-cancelling-card") > 0 then
         return
     end
-    for _ = 1, inventory.get_item_count("ms-infinity-water-card") * global.craftMultiplier do
-        if global.energy >= 5 then
+    for _ = 1, inventory.get_item_count("ms-infinity-water-card") * storage.craftMultiplier do
+        if storage.energy >= 5 then
             if not isAvailable("ms-digital-water", 1000) then
                 modifyStorage("ms-digital-water", 100)
-                global.energy = global.energy - 1
+                storage.energy = storage.energy - 1
             end
         end
     end
-    for templateId, count in pairs(inventory.get_contents()) do
-        if global.energy > 1 then
-            if recipes[templateId] ~= nil then
-                local recipe = recipes[templateId]
-                if global.uncrafting then
-                    uncraftItem(recipe, count * global.craftMultiplier, plan)
+    for _, item in pairs(inventory.get_contents()) do
+        if storage.energy > 1 then
+            if recipes[item.name] ~= nil then
+                local recipe = recipes[item.name]
+                if storage.uncrafting then
+                    uncraftItem(recipe, item.count * storage.craftMultiplier, plan)
                 else
                     if plan[recipe.result] ~= nil then
                         local request = plan[recipe.result] - getItemCount(recipe.result)
                         if request > 0 then
                             -- this is too bad, need less nested levels!
                             local intention = math.ceil(request / recipe.amount) -- how many craft operations we need
-                            if intention > count * global.craftMultiplier then
-                                intention = count * global.craftMultiplier
+                            if intention > item.count * storage.craftMultiplier then
+                                intention = item.count * storage.craftMultiplier
                             end
                             craftItem(recipe, intention)
                         end
                     end
                 end
-            elseif refining[templateId] ~= nil then
-                if plan[refining[templateId].filter] or plan[refining[templateId].secondaryFilter] then
-                    refineFluid(refining[templateId], count * global.craftMultiplier, plan)
+            elseif refining[item.name] ~= nil then
+                if plan[refining[item.name].filter] or plan[refining[item.name].secondaryFilter] then
+                    refineFluid(refining[item.name], item.count * storage.craftMultiplier, plan)
                 end
             end
         end
     end
 end
 
+local function createSignal (itemId, amount)
+    return {min = amount, value = itemId}
+end
+
 local function updateCombinator (combinator)
-    local signals = {}
-    table.insert(signals, {
-        count = global.capacity,
-        index = 1,
-        signal = {name = "signal-C", type = "virtual"}
-    })
-    table.insert(signals, {
-        count = global.energy,
-        index = 2,
-        signal = {name = "signal-E", type = "virtual"}
-    })
-    table.insert(signals, {
-        count = global.antiCapacity,
-        index = 3, signal = {name = "signal-S", type = "virtual"}
-    })
-    table.insert(signals, {
-        count = 100 - (global.antiCapacity / global.capacity * 100),
-        index = 4,
-        signal = {name = "signal-P", type = "virtual"}
-    })
+    combinator.get_control_behavior().remove_section(1);
+    local section = combinator.get_control_behavior().add_section();
+
+    section.set_slot(1, createSignal("signal-C", storage.capacity))
+    section.set_slot(2, createSignal("signal-E", storage.energy))
+    section.set_slot(3, createSignal("signal-S", storage.antiCapacity))
+    section.set_slot(4, createSignal("signal-P", 100 - (storage.antiCapacity / storage.capacity * 100)))
+
     local index = 5
-    for name, count in pairs(global.storage) do
+    for name, count in pairs(storage.storage) do
         if count > 0 then
-            table.insert(signals, {
-                count = count,
-                index = index,
-                signal = {name = name, type = utils.itemType(name)}
-            })
+            section.set_slot(index, createSignal(name, count))
             index = index + 1
         end
     end
-    combinator.get_control_behavior().parameters = signals
 end
 
 local function updateLogisticChest (chest)
@@ -425,21 +413,21 @@ local function emptySubnetInventory (inventory, storage)
         return
     end
     if inventory.get_item_count("ms-ejection-card") == 0 then
-        for itemId, amount in pairs(inventory.get_contents()) do
-            if isStorable(itemId) then
-                local intention = amount
+        for _, wrapper in pairs(inventory.get_contents()) do
+            if isStorable(wrapper.name) then
+                local intention = wrapper.count
                 local freeSpace = 65536 - storage.antiCapacity
                 if intention > freeSpace then
                     intention = freeSpace
                 end
-                if storage.items[itemId] == nil then
-                    storage.items[itemId] = intention
+                if storage.items[wrapper.name] == nil then
+                    storage.items[wrapper.name] = intention
                 else
-                    storage.items[itemId] = storage.items[itemId] + intention
+                    storage.items[wrapper.name] = storage.items[wrapper.name] + intention
                 end
                 if intention > 0 then
                     storage.antiCapacity = storage.antiCapacity + intention
-                    inventory.remove({name = itemId, count = intention})
+                    inventory.remove({name = wrapper.name, count = intention})
                 end
             end
         end
@@ -488,16 +476,16 @@ script.on_nth_tick(60, function()
             emptyInventory(interfaceInventory)
             refillInventory(interfaceInventory, createPlan(interfaceInventory, getSetting(SETTING_INTERFACE_CHEST_SIZE)))
         else
-            emptySubnetInventory(interfaceInventory, global["storage-" .. interfaceId])
-            refillSubnetInventory(interfaceInventory, global["storage-" .. interfaceId], createPlan(interfaceInventory, getSetting(SETTING_INTERFACE_CHEST_SIZE)))
+            emptySubnetInventory(interfaceInventory, storage["storage-" .. interfaceId])
+            refillSubnetInventory(interfaceInventory, storage["storage-" .. interfaceId], createPlan(interfaceInventory, getSetting(SETTING_INTERFACE_CHEST_SIZE)))
         end
     end
-    for _, logisticChest in pairs(safeTable(global.chests)) do
+    for _, logisticChest in pairs(safeTable(storage.chests)) do
         updateLogisticChest(logisticChest)
     end
     refillInventory(inventory, plan)
     updateLabel(player)
-    for _, combinator in pairs(safeTable(global.combinators)) do
+    for _, combinator in pairs(safeTable(storage.combinators)) do
         updateCombinator(combinator)
     end
 end)
@@ -516,24 +504,24 @@ script.on_nth_tick(600, function()
     local player = game.get_player(1)
     local inventory = player.force.get_linked_inventory("ms-material-storage", 0)
     local capacity = getSetting(SETTING_DIGITAL_STORAGE_BASE_VOLUME)
-    for itemId, count in pairs(inventory.get_contents()) do
-        if itemId == "ms-memory-module-t1" then
-            capacity = capacity + (count * 4096)
+    for _, wrapper in pairs(inventory.get_contents()) do
+        if wrapper.name == "ms-memory-module-t1" then
+            capacity = capacity + (wrapper.count * 4096)
         end
-        if itemId == "ms-memory-module-t2" then
-            capacity = capacity + (count * 16384)
+        if wrapper.name == "ms-memory-module-t2" then
+            capacity = capacity + (wrapper.count * 16384)
         end
-        if itemId == "ms-memory-module-t3" then
-            capacity = capacity + (count * 65536)
+        if wrapper.name == "ms-memory-module-t3" then
+            capacity = capacity + (wrapper.count * 65536)
         end
-        if itemId == "ms-memory-subnet-card" then
-            capacity = capacity + (count * 65536)
+        if wrapper.name == "ms-memory-subnet-card" then
+            capacity = capacity + (wrapper.count * 65536)
         end
     end
-    global.capacity = capacity
-    global.antiCapacity = countItems(global.storage)
+    storage.capacity = capacity
+    storage.antiCapacity = countItems(storage.storage)
     for _, interfaceId in pairs(interfaces) do
-        global["storage-" .. interfaceId].antiCapacity = countItems(global["storage-" .. interfaceId].items)
+        storage["storage-" .. interfaceId].antiCapacity = countItems(storage["storage-" .. interfaceId].items)
     end
     local craftMultiplier = 1
     if inventory.get_item_count("ms-crafting-expansion-card-t1") > 0 then
@@ -545,48 +533,54 @@ script.on_nth_tick(600, function()
             end
         end
     end
-    global.craftMultiplier = craftMultiplier
-    global.uncrafting = inventory.get_item_count("ms-uncrafting-card") > 0
+    storage.craftMultiplier = craftMultiplier
+    storage.uncrafting = inventory.get_item_count("ms-uncrafting-card") > 0
 end)
 
 local function entityPlacementHandler (entity)
-    if entity and entity.valid and entity.name == "ms-material-combinator" then
-        if global.combinators == nil then
-            global.combinators = {}
+    if entity ~= nil and entity.valid then
+        if entity.name == "ms-material-combinator" then
+            game.get_player(1).print("Material combinator placed")
+            if storage.combinators == nil then
+                storage.combinators = {}
+            end
+            table.insert(storage.combinators, entity)
         end
-        table.insert(global.combinators, entity)
-    end
-    if entity and entity.valid and entity.name == "ms-material-logistic-chest" then
-        if global.chests == nil then
-            global.chests = {}
+        if entity.name == "ms-material-logistic-chest" then
+            game.get_player(1).print("Material logistic chest placed")
+            if storage.chests == nil then
+                storage.chests = {}
+            end
+            table.insert(storage.chests, entity)
         end
-        table.insert(global.chests, entity)
     end
 end
 
-script.on_event(defines.events.on_built_entity, function(event) entityPlacementHandler(event.created_entity) end)
-script.on_event(defines.events.on_robot_built_entity, function(event) entityPlacementHandler(event.created_entity) end)
+script.on_event(defines.events.on_built_entity, function(event) entityPlacementHandler(event.entity) end)
+script.on_event(defines.events.on_robot_built_entity, function(event) entityPlacementHandler(event.entity) end)
 script.on_event(defines.events.on_entity_cloned, function(event) entityPlacementHandler(event.destination) end)
 
 local function entityRemovalHandler (event)
     if event.entity and event.entity.valid and event.entity.name == "ms-material-combinator" then
-        if global.combinators == nil then
-            global.combinators = {}
+        if storage.combinators == nil then
+            storage.combinators = {}
         end
-        for counter = 1, #global.combinators do
-            if global.combinators[counter] == event.entity then
-                table.remove(global.combinators, counter)
+        for counter = 1, #storage.combinators do
+            if storage.combinators[counter] == event.entity then
+                game.get_player(1).print("Material combinator removed")
+                table.remove(storage.combinators, counter)
                 return
             end
         end
     end
     if event.entity and event.entity.valid and event.entity.name == "ms-material-logistic-chest" then
-        if global.chests == nil then
-            global.chests = {}
+        if storage.chests == nil then
+            storage.chests = {}
         end
-        for counter = 1, #global.chests do
-            if global.chests[counter] == event.entity then
-                table.remove(global.chests, counter)
+        for counter = 1, #storage.chests do
+            if storage.chests[counter] == event.entity then
+                game.get_player(1).print("Material logistic chest removed")
+                table.remove(storage.chests, counter)
                 return
             end
         end
@@ -612,31 +606,31 @@ end
 script.on_event(defines.events.on_console_chat, function(event)
     local player = game.get_player(1)
     if event.message == "!storage" then
-        printStorage(player, global.storage, global.capacity, "Main Digital Storage")
+        printStorage(player, storage.storage, storage.capacity, "Main Digital Storage")
         return
     end
     if event.message == "!storage-A" then
-        printStorage(player, global["storage-a"].items, 65536, "Subnet-A Storage")
+        printStorage(player, storage["storage-a"].items, 65536, "Subnet-A Storage")
         return
     end
     if event.message == "!storage-B" then
-        printStorage(player, global["storage-b"].items, 65536, "Subnet-B Storage")
+        printStorage(player, storage["storage-b"].items, 65536, "Subnet-B Storage")
         return
     end
     if event.message == "!storage-C" then
-        printStorage(player, global["storage-c"].items, 65536, "Subnet-C Storage")
+        printStorage(player, storage["storage-c"].items, 65536, "Subnet-C Storage")
         return
     end
     if event.message == "!storage-D" then
-        printStorage(player, global["storage-d"].items, 65536, "Subnet-D Storage")
+        printStorage(player, storage["storage-d"].items, 65536, "Subnet-D Storage")
         return
     end
     if event.message == "!storage-E" then
-        printStorage(player, global["storage-e"].items, 65536, "Subnet-E Storage")
+        printStorage(player, storage["storage-e"].items, 65536, "Subnet-E Storage")
         return
     end
     if event.message == "!storage-F" then
-        printStorage(player, global["storage-f"].items, 65536, "Subnet-F Storage")
+        printStorage(player, storage["storage-f"].items, 65536, "Subnet-F Storage")
         return
     end
     if event.message == "!collect" then
@@ -695,9 +689,9 @@ script.on_event(defines.events.on_console_chat, function(event)
     end
     if event.message == "!clear" then
         player.print("Cleaning digital storage")
-        for itemId, _ in pairs(global.storage) do
-            global.storage[itemId] = nil
+        for itemId, _ in pairs(storage.storage) do
+            storage.storage[itemId] = nil
         end
-        global.antiCapacity = 0
+        storage.antiCapacity = 0
     end
 end)
