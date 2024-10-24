@@ -1,4 +1,9 @@
 ==========================
+Version 0.5.3 / 24-10-2024
++ Removed debug messages on placing combinators and logistic chests
++ Storage should not accept quality items
+
+==========================
 Version 0.5.2 / 23-10-2024
 + Removed crafting templates for items that migrated into SA DLC to prevent crash on base game
 

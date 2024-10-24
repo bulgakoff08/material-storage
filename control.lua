@@ -100,8 +100,14 @@ local function updateLabel (player)
             formatEnergy(storage.energy), storage.craftMultiplier)
 end
 
-local function isStorable (itemId)
-    return recipes[itemId] == nil and modules[itemId] == nil and refining[itemId] == nil
+local function isStorable (wrapper)
+    local quality = wrapper["quality"]["level"]
+    if quality ~= nil then
+        if quality > 1 then
+            return false
+        end
+    end
+    return recipes[wrapper.name] == nil and modules[wrapper.name] == nil and refining[wrapper.name] == nil
 end
 
 local function isAvailable (itemId, amount)
@@ -148,8 +154,8 @@ local function putItem (inventory, itemId, amount)
         if freeSpace < intention then
             intention = freeSpace
         end
-        modifyStorage(itemId, intention)
-        inventory.remove({name = itemId, count = intention})
+        local removed = inventory.remove({name = itemId, count = intention})
+        modifyStorage(itemId, removed)
     end
 end
 
@@ -191,7 +197,7 @@ local function emptyInventory (inventory)
     end
     if inventory.get_item_count("ms-ejection-card") == 0 then
         for _, wrapper in pairs(inventory.get_contents()) do
-            if isStorable(wrapper.name) then
+            if isStorable(wrapper) then
                 putItem(inventory, wrapper.name, wrapper.count)
             end
         end
@@ -414,7 +420,7 @@ local function emptySubnetInventory (inventory, storage)
     end
     if inventory.get_item_count("ms-ejection-card") == 0 then
         for _, wrapper in pairs(inventory.get_contents()) do
-            if isStorable(wrapper.name) then
+            if isStorable(wrapper) then
                 local intention = wrapper.count
                 local freeSpace = 65536 - storage.antiCapacity
                 if intention > freeSpace then
@@ -540,14 +546,12 @@ end)
 local function entityPlacementHandler (entity)
     if entity ~= nil and entity.valid then
         if entity.name == "ms-material-combinator" then
-            game.get_player(1).print("Material combinator placed")
             if storage.combinators == nil then
                 storage.combinators = {}
             end
             table.insert(storage.combinators, entity)
         end
         if entity.name == "ms-material-logistic-chest" then
-            game.get_player(1).print("Material logistic chest placed")
             if storage.chests == nil then
                 storage.chests = {}
             end
@@ -567,7 +571,6 @@ local function entityRemovalHandler (event)
         end
         for counter = 1, #storage.combinators do
             if storage.combinators[counter] == event.entity then
-                game.get_player(1).print("Material combinator removed")
                 table.remove(storage.combinators, counter)
                 return
             end
@@ -579,7 +582,6 @@ local function entityRemovalHandler (event)
         end
         for counter = 1, #storage.chests do
             if storage.chests[counter] == event.entity then
-                game.get_player(1).print("Material logistic chest removed")
                 table.remove(storage.chests, counter)
                 return
             end
@@ -633,50 +635,6 @@ script.on_event(defines.events.on_console_chat, function(event)
         printStorage(player, storage["storage-f"].items, 65536, "Subnet-F Storage")
         return
     end
-    if event.message == "!collect" then
-        local ownedEntities = {"ammo-turret", "accumulator", "arithmetic-combinator", "tile", "artillery-turret", "assembling-machine", "beacon", "boiler", "cargo-wagon", "constant-combinator", "container", "curved-rail", "decider-combinator", "electric-energy-interface", "electric-pole", "fluid-turret", "furnace", "gate", "generator", "heat-pipe", "inserter", "lab", "lamp", "electric-turret", "mining-drill", "offshore-pump", "pipe", "pipe-to-ground", "power-switch", "programmable-speaker", "pump", "radar", "rail-chain-signal", "solar-panel", "splitter", "storage-tank", "straight-rail", "transport-belt", "underground-belt", "wall"}
-        for _, entityId in pairs(ownedEntities) do
-            local entities = game.surfaces[1].find_entities_filtered({type = entityId})
-            for _, entity in pairs(entities) do
-                if game.item_prototypes[entity.name] ~= nil then
-                    if entity.name ~= "crash-site-generator-1" then
-                        modifyStorage(entity.name, 1)
-                        local inventory = entity.get_inventory(defines.inventory.chest)
-                        if inventory then
-                            for itemId, amount in pairs(inventory.get_contents()) do
-                                modifyStorage(itemId, amount)
-                            end
-                        end
-                        entity.destroy()
-                    end
-                else
-                    if entity.valid then
-                        local inventory = entity.get_inventory(defines.inventory.chest)
-                        if inventory then
-                            for itemId, amount in pairs(inventory.get_contents()) do
-                                modifyStorage(itemId, amount)
-                            end
-                            entity.destroy()
-                        else
-                            entity.force = game.forces[1]
-                            entity.order_deconstruction(entity.force)
-                        end
-                    end
-                end
-            end
-        end
-        local entities = game.surfaces[1].find_entities()
-        for _, entity in pairs(entities) do
-            if entity.type == "corpse" or entity.type == "rail-remnants" or entity.type == "land-mine" or entity.type == "ammo-turret" then
-                entity.destroy()
-            end
-        end
-        local tiles = game.surfaces[1].find_tiles_filtered({})
-        for _, tile in pairs(tiles) do
-            tile.order_deconstruction(game.forces[1])
-        end
-        return
-    end
     if event.message == "!give" then
         local inventory = player.force.get_linked_inventory("ms-material-storage", 0)
         for itemId, count in pairs(createPlan(inventory, getSetting(SETTING_MATERIAL_CHEST_SIZE))) do
@@ -686,12 +644,5 @@ script.on_event(defines.events.on_console_chat, function(event)
                 player.print(required .. " " .. itemId .. " added to digital storage")
             end
         end
-    end
-    if event.message == "!clear" then
-        player.print("Cleaning digital storage")
-        for itemId, _ in pairs(storage.storage) do
-            storage.storage[itemId] = nil
-        end
-        storage.antiCapacity = 0
     end
 end)
