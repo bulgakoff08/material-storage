@@ -8,6 +8,7 @@ local SETTING_INTERFACE_CHEST_SIZE = "ms-interface-chest-size"
 local SETTING_CRYSTAL_ENERGY_VALUE = "ms-crystal-energy-value"
 local SETTING_SOLAR_PANEL_ENERGY_RATE = "ms-solar-panel-energy-rate"
 local SETTING_DIGITAL_STORAGE_BASE_VOLUME = "ms-digital-storage-base-volume"
+local SETTING_COMBINATORS_PER_BATCH = "ms-combinator-batch-size"
 
 data:extend({
     {
@@ -49,5 +50,13 @@ data:extend({
         default_value = 4096,
         minimum_value = 1024,
         maximum_value = 1048576
+    },
+    {
+        type = "int-setting",
+        name = SETTING_COMBINATORS_PER_BATCH,
+        setting_type = "startup",
+        default_value = 25,
+        minimum_value = 10,
+        maximum_value = 100
     }
 })

@@ -10,6 +10,8 @@ local SETTING_CRYSTAL_ENERGY_VALUE = "ms-crystal-energy-value"
 local SETTING_SOLAR_PANEL_ENERGY_RATE = "ms-solar-panel-energy-rate"
 local SETTING_DIGITAL_STORAGE_BASE_VOLUME = "ms-digital-storage-base-volume"
 
+local SETTING_COMBINATORS_PER_BATCH = "ms-combinator-batch-size"
+
 local function getSetting (settingId)
     return settings.startup[settingId].value
 end
@@ -402,6 +404,23 @@ local function updateCombinator (combinator)
     end
 end
 
+local function updateCombinatorBatch ()
+    local combinators = safeTable(storage.combinators)
+    if #combinators == 0 then return end
+    storage.lastUpdatedCombinator = storage.lastUpdatedCombinator or 1
+    local start = storage.lastUpdatedCombinator
+    local end_index = math.min(start + getSetting(SETTING_COMBINATORS_PER_BATCH) - 1, #combinators)
+    for i = start, end_index do
+        if combinators[i] and combinators[i].valid then
+            updateCombinator(combinators[i])
+        end
+    end
+    storage.lastUpdatedCombinator = end_index + 1
+    if storage.lastUpdatedCombinator > #combinators then
+        storage.lastUpdatedCombinator = 1
+    end
+end
+
 local function updateLogisticChest (chest)
     if chest and chest.valid then
         local inventory = chest.get_inventory(defines.inventory.chest)
@@ -491,9 +510,7 @@ script.on_nth_tick(60, function()
     end
     refillInventory(inventory, plan)
     updateLabel(player)
-    for _, combinator in pairs(safeTable(storage.combinators)) do
-        updateCombinator(combinator)
-    end
+    updateCombinatorBatch()
 end)
 
 local function countItems (storage)

@@ -1,4 +1,8 @@
 ==========================
+Version 0.5.4 / 24-10-2024
++ Material Combinators now updated in groups by 25. Can be configured in mod settings
+
+==========================
 Version 0.5.3 / 24-10-2024
 + Removed debug messages on placing combinators and logistic chests
 + Storage should not accept quality items
