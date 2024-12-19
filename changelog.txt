@@ -1,4 +1,8 @@
 ==========================
+Version 0.5.5 / 19-12-2024
++ Added setting to hide label with storage space and craft speed info
+
+==========================
 Version 0.5.4 / 10-11-2024
 + Material Combinators now updated in groups by 25. Can be configured in mod settings
 

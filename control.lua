@@ -9,6 +9,7 @@ local SETTING_INTERFACE_CHEST_SIZE = "ms-interface-chest-size"
 local SETTING_CRYSTAL_ENERGY_VALUE = "ms-crystal-energy-value"
 local SETTING_SOLAR_PANEL_ENERGY_RATE = "ms-solar-panel-energy-rate"
 local SETTING_DIGITAL_STORAGE_BASE_VOLUME = "ms-digital-storage-base-volume"
+local SETTING_HIDE_STATUS_LABEL = "ms-hide-status-label"
 
 local SETTING_COMBINATORS_PER_BATCH = "ms-combinator-batch-size"
 
@@ -88,18 +89,28 @@ local function formatEnergy (amount)
     end
 end
 
-local function updateLabel (player)
-    if player.gui.top.storage == nil then
-        local label = player.gui.top.add({type = "label", name = "storage", caption = ""})
-        label.style.font = "default-bold"
-        label.style.left_margin = 16
-        label.style.right_margin = 16
-        label.style.top_margin = 16
-        label.style.bottom_margin = 16
+local function removeGuiLabel (player)
+    if player.gui.top.storage ~= nil then
+        player.gui.top.storage.destroy()
     end
-    player.gui.top.storage.caption = string.format("STORAGE: %s / %s, ENERGY: %s, x%d CRAFT",
-            formatStorage(storage.antiCapacity), formatStorage(storage.capacity),
-            formatEnergy(storage.energy), storage.craftMultiplier)
+end
+
+local function updateLabel (player)
+    if getSetting(SETTING_HIDE_STATUS_LABEL) == 1 then
+        removeGuiLabel(player)
+    else
+        if player.gui.top.storage == nil then
+            local label = player.gui.top.add({type = "label", name = "storage", caption = ""})
+            label.style.font = "default-bold"
+            label.style.left_margin = 16
+            label.style.right_margin = 16
+            label.style.top_margin = 16
+            label.style.bottom_margin = 16
+        end
+        player.gui.top.storage.caption = string.format("STORAGE: %s / %s, ENERGY: %s, x%d CRAFT",
+                formatStorage(storage.antiCapacity), formatStorage(storage.capacity),
+                formatEnergy(storage.energy), storage.craftMultiplier)
+    end
 end
 
 local function isStorable (wrapper)
