@@ -114,9 +114,9 @@ local function updateLabel (player)
 end
 
 local function isStorable (wrapper)
-    local quality = wrapper["quality"]["level"]
+    local quality = wrapper["quality"]
     if quality ~= nil then
-        if quality > 1 then
+        if quality ~= "normal" then
             return false
         end
     end
