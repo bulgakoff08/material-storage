@@ -50,7 +50,7 @@ data:extend({
         setting_type = "startup",
         default_value = 4096,
         minimum_value = 1024,
-        maximum_value = 1048576
+        maximum_value = 1073741824
     },
     {
         type = "int-setting",

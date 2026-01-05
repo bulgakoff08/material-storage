@@ -50,17 +50,18 @@ local templates = {
     ["ms-chemical-card-solid-fuel-2"] = {card = "ms-blank-chemical-card", itemId = "solid-fuel"},
     ["ms-chemical-card-solid-fuel-3"] = {card = "ms-blank-chemical-card", itemId = "solid-fuel"},
     ["ms-chemical-card-sulfur"] = {card = "ms-blank-chemical-card", itemId = "sulfur"},
+    ["ms-chemical-card-sulfuric-acid"] = {card = "ms-blank-chemical-card", itemId = "sulfur"},
 
     ["ms-crafting-card-assembling-machine-1"] = {card = "ms-blank-crafting-card", itemId = "assembling-machine-1"},
     ["ms-crafting-card-assembling-machine-2"] = {card = "ms-blank-crafting-card", itemId = "assembling-machine-2"},
     ["ms-crafting-card-automation-science-pack"] = {card = "ms-blank-crafting-card", itemId = "automation-science-pack"},
+    ["ms-crafting-card-bulk-inserter"] = {card = "ms-blank-crafting-card", itemId = "bulk-inserter"},
     ["ms-crafting-card-copper-cable"] = {card = "ms-blank-crafting-card", itemId = "copper-cable"},
     ["ms-crafting-card-electronic-circuit"] = {card = "ms-blank-crafting-card", itemId = "electronic-circuit"},
     ["ms-crafting-card-fast-inserter"] = {card = "ms-blank-crafting-card", itemId = "fast-inserter"},
     ["ms-crafting-card-fast-splitter"] = {card = "ms-blank-crafting-card", itemId = "fast-splitter"},
     ["ms-crafting-card-fast-transport-belt"] = {card = "ms-blank-crafting-card", itemId = "fast-transport-belt"},
     ["ms-crafting-card-fast-underground-belt"] = {card = "ms-blank-crafting-card", itemId = "fast-underground-belt"},
-    --["ms-crafting-card-filter-inserter"] = {card = "ms-blank-crafting-card", itemId = "filter-inserter"},
     ["ms-crafting-card-firearm-magazine"] = {card = "ms-blank-crafting-card", itemId = "firearm-magazine"},
     ["ms-crafting-card-inserter"] = {card = "ms-blank-crafting-card", itemId = "inserter"},
     ["ms-crafting-card-iron-chest"] = {card = "ms-blank-crafting-card", itemId = "iron-chest"},
@@ -74,7 +75,6 @@ local templates = {
     ["ms-crafting-card-rail"] = {card = "ms-blank-crafting-card", itemId = "rail"},
     ["ms-crafting-card-small-lamp"] = {card = "ms-blank-crafting-card", itemId = "small-lamp"},
     ["ms-crafting-card-splitter"] = {card = "ms-blank-crafting-card", itemId = "splitter"},
-    --["ms-crafting-card-stack-inserter"] = {card = "ms-blank-crafting-card", itemId = "stack-inserter"},
     ["ms-crafting-card-stone-wall"] = {card = "ms-blank-crafting-card", itemId = "stone-wall"},
     ["ms-crafting-card-transport-belt"] = {card = "ms-blank-crafting-card", itemId = "transport-belt"},
     ["ms-crafting-card-underground-belt"] = {card = "ms-blank-crafting-card", itemId = "underground-belt"},
@@ -99,7 +99,6 @@ local templates = {
     ["ms-crafting-card-low-density-structure"] = {card = "ms-blank-crafting-card", itemId = "low-density-structure"},
     ["ms-crafting-card-processing-unit"] = {card = "ms-blank-crafting-card", itemId = "processing-unit"},
     ["ms-crafting-card-production-science-pack"] = {card = "ms-blank-crafting-card", itemId = "production-science-pack"},
-    --["ms-crafting-card-rocket-control-unit"] = {card = "ms-blank-crafting-card", itemId = "rocket-control-unit"},
     ["ms-crafting-card-rocket-fuel"] = {card = "ms-blank-crafting-card", itemId = "rocket-fuel"},
     ["ms-crafting-card-utility-science-pack"] = {card = "ms-blank-crafting-card", itemId = "utility-science-pack"},
 
@@ -162,10 +161,8 @@ data:extend({
     recipe("crafting", 1, "ms-chemical-card-heavy-oil-cracking", items("ms-digital-heavy-oil", 1000, "ms-blank-chemical-card", 1), items("ms-chemical-card-heavy-oil-cracking", 1)),
     recipe("crafting", 1, "ms-chemical-card-light-oil-cracking", items("ms-digital-light-oil", 1000, "ms-blank-chemical-card", 1), items("ms-chemical-card-light-oil-cracking", 1)),
     recipe("crafting", 1, "ms-chemical-card-lubricant", items("ms-digital-lubricant", 1000, "ms-blank-chemical-card", 1), items("ms-chemical-card-lubricant", 1)),
-    recipe("crafting", 1, "ms-chemical-card-sulfuric-acid", items("ms-digital-sulfuric-acid", 1000, "ms-blank-chemical-card", 1), items("ms-chemical-card-sulfuric-acid", 1)),
 
     hiddenRecipe("smelting", 1, "ms-chemical-card-heavy-oil-cracking-formatting", items("ms-chemical-card-heavy-oil-cracking", 1), items("ms-blank-chemical-card", 1)),
     hiddenRecipe("smelting", 1, "ms-chemical-card-light-oil-cracking-formatting", items("ms-chemical-card-light-oil-cracking", 1), items("ms-blank-chemical-card", 1)),
-    hiddenRecipe("smelting", 1, "ms-chemical-card-lubricant-formatting", items("ms-chemical-card-lubricant", 1), items("ms-blank-chemical-card", 1)),
-    hiddenRecipe("smelting", 1, "ms-chemical-card-sulfuric-acid", items("ms-chemical-card-sulfuric-acid", 1), items("ms-blank-chemical-card", 1))
+    hiddenRecipe("smelting", 1, "ms-chemical-card-lubricant-formatting", items("ms-chemical-card-lubricant", 1), items("ms-blank-chemical-card", 1))
 })

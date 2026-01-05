@@ -62,10 +62,10 @@ data:extend({
 
     -- inserters
     item("ms-crafting-card-fast-inserter", 1, "ms-inserters"),
-    --item("ms-crafting-card-filter-inserter", 1, "ms-inserters"),
     item("ms-crafting-card-inserter", 1, "ms-inserters"),
     item("ms-crafting-card-long-handed-inserter", 1, "ms-inserters"),
     item("ms-crafting-card-stack-inserter", 1, "ms-inserters"),
+    item("ms-crafting-card-bulk-inserter", 1, "ms-inserters"),
 
     -- pipes
     item("ms-crafting-card-pipe", 1, "ms-pipes"),
@@ -126,7 +126,6 @@ data:extend({
     item("ms-crafting-card-engine-unit", 1, "ms-parts"),
     item("ms-crafting-card-electric-engine-unit", 1, "ms-parts"),
     item("ms-crafting-card-flying-robot-frame", 1, "ms-parts"),
-    --item("ms-crafting-card-rocket-control-unit", 1, "ms-parts"),
     item("ms-crafting-card-low-density-structure", 1, "ms-parts"),
     item("ms-crafting-card-rocket-fuel", 1, "ms-parts"),
 
@@ -142,13 +141,5 @@ data:extend({
     item("ms-crafting-card-firearm-magazine", 1, "ms-military"),
     item("ms-crafting-card-grenade", 1, "ms-military"),
     item("ms-crafting-card-piercing-rounds-magazine", 1, "ms-military"),
-    item("ms-crafting-card-stone-wall", 1, "ms-military"),
-
-    -- TEMPLATES FOR COPY/PASTE
-    -- item("", 1, "other"),
-    -- item("", 1, "other"),
-    -- item("", 1, "other"),
-    -- item("", 1, "other"),
-    -- item("", 1, "other"),
-    -- item("", 1, "other"),
+    item("ms-crafting-card-stone-wall", 1, "ms-military")
 })
