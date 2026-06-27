@@ -239,16 +239,8 @@ data:extend({
         logistic_mode = "buffer",
         open_sound = {filename = "__base__/sound/metallic-chest-open.ogg", volume=0.43},
         close_sound = {filename = "__base__/sound/metallic-chest-close.ogg", volume = 0.43},
-        animation_sound = {
-            {filename = "__base__/sound/passive-provider-chest-open-1.ogg", volume = 0.3},
-            {filename = "__base__/sound/passive-provider-chest-open-2.ogg", volume = 0.3},
-            {filename = "__base__/sound/passive-provider-chest-open-3.ogg", volume = 0.3},
-            {filename = "__base__/sound/passive-provider-chest-open-4.ogg", volume = 0.3},
-            {filename = "__base__/sound/passive-provider-chest-open-5.ogg", volume = 0.3}
-        },
         vehicle_impact_sound = {filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65},
-        opened_duration = 7,
-        animation = {
+        pictures = {
             layers = {
                 {
                     filename = GRAPHICS_PATH .. "entities/material-logistic-chest.png",

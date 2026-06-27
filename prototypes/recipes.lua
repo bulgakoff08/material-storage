@@ -2,7 +2,7 @@ local utils = require("commons")
 
 local function ingredient (itemId, count)
     if (count < 1) then
-        return {type = utils.itemType(itemId), name = itemId, probability = count}
+        return {type = utils.itemType(itemId), name = itemId, individual_probability = count}
     else
         return {type = utils.itemType(itemId), name = itemId, amount = count}
     end
@@ -21,7 +21,7 @@ local function recipe (category, duration, recipeId, inputs, outputs)
     return {
         type = "recipe",
         name = recipeId,
-        category = category,
+        categories = {category},
         energy_required = duration,
         ingredients = inputs,
         results = outputs,
@@ -33,7 +33,7 @@ local function hiddenRecipe (category, duration, recipeId, inputs, outputs)
     return {
         type = "recipe",
         name = recipeId,
-        category = category,
+        categories = {category},
         hide_from_player_crafting = true,
         energy_required = duration,
         ingredients = inputs,
